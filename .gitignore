@@ -1,0 +1,10 @@
+# Generated local planning report (CI uploads it explicitly as an artifact).
+/Docs/Testing/LatestPipelineReport.json
+/tmp/
+
+# Unity-generated caches, once an actual Unity project is created.
+/Library/
+/Temp/
+/Obj/
+/Logs/
+/UserSettings/

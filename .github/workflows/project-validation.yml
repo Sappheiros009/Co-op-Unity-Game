@@ -1,0 +1,58 @@
+name: Planning validation (not a game build)
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      check_release_readiness:
+        description: Fail closed when Unity/release prerequisites are unresolved
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: planning-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  planning-validation:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Validate planning artifacts
+        run: ./ProjectPipeline.ps1 -Mode Validate -WriteReport
+      - name: Test validator with positive and negative fixtures
+        run: ./Docs/Testing/Test-ProjectPipeline.ps1
+      - name: Save validation evidence only
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: planning-validation-report
+          path: Docs/Testing/LatestPipelineReport.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  release-readiness:
+    if: ${{ inputs.check_release_readiness == true }}
+    needs: planning-validation
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout reviewed source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - name: Require implemented and verified release gates
+        shell: pwsh
+        run: ./ProjectPipeline.ps1 -Mode Readiness

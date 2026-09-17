@@ -1,0 +1,38 @@
+# 슬라임 협동게임 작업 지침
+
+작업 시작 시 Plan.md, Docs/WORKING_PRINCIPLES.md, Docs/PROJECT_STATE.md, Docs/FOLDER_MAP.md를 읽는다. 기술 작업은 Docs/ARCHITECTURE.md, Docs/PIPELINE.md, Docs/PROJECT_CONTRACT.json을 함께 읽는다. 사용자의 전체 역할·개발 원칙은 Docs/PROJECT_PROMPT.md에 있다.
+
+## 문서와 의사결정
+
+- 이 세션은 기획서를 담당한다. 수석 개발·기술·디자인·네트워크·운영 관점으로 검토한다.
+- 확정 사항은 질문·답변·선택지를 제거한 서술형 기획서로 유지한다. Plan.md가 통합 진입점이다.
+- 미정 항목은 PROJECT_STATE에 기록한다. 필요할 때 사이드바에서 소수의 객관식으로 조율하고 결정 후 기획서에 반영한다.
+- 예시·AI 추천·무응답은 확정이 아니다. 기존 결정과 충돌하면 근거를 확인한다.
+- 원문 프롬프트는 별도 참고 문서이며 예시 목록을 게임 기능으로 자동 추가하지 않는다.
+
+## 확정 규칙
+
+- 기본 2~4인, 1인칭 3D 협동, Steam PC, 직접 공격 없음.
+- Unity 목표 6000.6.1f1. 패키지·실제 호환성은 아직 미검증.
+- PlayFab Multiplayer Servers의 운영자 전용 서버가 최종 판정. 방장 이탈 시 방장 역할만 이전하며 런·타이머·점수 유지.
+- 한 명 유효 출구 도착으로 클리어 성립, 최대 5초 집계. 시작 참가자 전원 도착 시 조기 마감, 사망·이탈로 명단 축소 없음.
+- 출구 진입자는 안전 대기·재이탈 불가. 미탈출자는 다음 구간 부활.
+- 팀 총점만 사용. 실제 도착 인원 보너스, 1인 보너스 0, 비율 보정·별도 전원 보너스 없음. 몬스터 처치 점수 없음.
+- 속도 평가 종료는 집계 마감. 총점 우선·동점 시 시간 우선. 공개 협동 랭킹은 기록 시작 4인 기준, 일반 이탈·사망·일부 미탈출 자체로 팀 클리어 기록 제외 없음.
+- 협동 역할은 구간 시작 인원에 맞추고 사망으로 줄이지 않는다. 부족하면 접근 가능한 사망 경로로 실제 전멸 후 재도전.
+- 전멸 시 런 점수·임시 진행 초기화 후 로비. 해당 챕터 처음부터 재시작. 영구 해금·업적·설정 보존.
+- 데모 1챕터, 정식 3챕터 목표. 실제 공개 챕터·일정은 미정.
+- 서버 검증과 Steam Game Ban 사용. EAC·BattlEye 등 별도 PC 보호 제품 제외. 확인된 핵 즉시 세션 추방, 계정 제재는 Steam 계정과 증거를 운영자가 검토.
+- 전화번호·IP·기기 일치만의 자동 제재, 타 프로그램 강제 삭제 없음. Steam Game Ban은 탐지 프로그램이 아니다.
+
+## 경로와 검증
+
+- 기능명: Monster, MapGeneration, StartandExit, Story.
+- 지역명: Chapter02_LAVA, Chapter05_Square, Chapter06_FrozenMountain, Chapter07_Hometown.
+- 기존 폴더명·대소문자 유지. 담당 README와 실제 수정 파일·검증 근거를 연결.
+- 기획 검사: pwsh -NoProfile -File ./ProjectPipeline.ps1 -Mode Validate -WriteReport
+- 검사기 테스트: pwsh -NoProfile -File ./Docs/Testing/Test-ProjectPipeline.ps1
+- 출시 준비: pwsh -NoProfile -File ./ProjectPipeline.ps1 -Mode Readiness
+- 문서 검사 통과는 게임·보안·배포 성공이 아니다. 원격 CI는 실제 실행 결과로 확인.
+- 사용자 요청에 따라 확정 문서의 과거 Q&A를 제거했고 계약 검사는 서술형 기획·규칙·링크를 검사한다. 이전 원문 블록 해시 기준을 재도입하지 않는다.
+- 비밀 키·실제 전화번호·인증코드·비공개 사건 자료를 공개 저장소에 넣지 않는다.

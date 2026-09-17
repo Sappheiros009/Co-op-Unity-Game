@@ -44,6 +44,9 @@
 | 제작 자원 | 직접 제작과 유료 자원 범위·예산·라이선스 | Art, Audio, ThirdParty |
 | 출시 | 실제 공개 챕터 선정, 랭킹·공개 방·채팅 도입 시점, 가격·판매 방식 | Story, Online, Operations |
 | 사양·언어 | 지원 OS·입력 장치·최소 사양·성능 예산·최종 출시 언어 | Player, UI, Localization |
+| 에셋 제작·조달 | 판타지 이세계풍 고품질 스타일라이즈드 방향과 저사양 우선 성능 기준을 포함한 AI 추천 통합안 승인 여부·예외 항목 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), Art, Audio, UI, Player, Monster, Levels |
+| 품질 설정 | 인게임 품질 프리셋·자동 추천·저사양 성능 목표·고급 옵션·실제 최소 사양과 Unity 렌더 파이프라인 | [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Core, Art, Levels |
+| 프론트엔드 표현 결정권 | 캐릭터·몬스터·보스 외형, UI/UX 스타일, VFX·SFX·음악·애니메이션·지역 분위기의 사용자 최종 승인 기록 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Art, Audio |
 
 서로 다른 선택이 함께 남아 있던 아이템 전달·협동 도구·일부 지역 기믹은 위 목록으로 관리한다. 미선택 항목과 AI 제안을 확정 기획으로 승격하지 않는다.
 

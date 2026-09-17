@@ -24,6 +24,8 @@
 │  ├─ PROJECT_STATE.md
 │  ├─ DESIGN_TEMPLATE.md
 │  ├─ DESIGN-0001-StageExit.md
+│  ├─ DESIGN-0002-CharacterAssetProduction.md
+│  ├─ DESIGN-0003-QualitySettings.md
 │  ├─ ARCHITECTURE.md
 │  ├─ PIPELINE.md
 │  ├─ PROJECT_CONTRACT.json

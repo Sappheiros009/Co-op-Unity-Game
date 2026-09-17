@@ -21,6 +21,13 @@
 
 다른 위치의 기존 구현 완료 기록을 이 저장소에서 확인한 실행 결과로 취급하지 않는다. 기존 해결 기록은 유지하고 재검증 결과를 별도로 연결한다.
 
+## 확정된 운영·사용자 결정
+
+- 프론트엔드는 플레이어가 보고·듣고·느끼는 클라이언트 경험 계층으로 정의한다.
+- 캐릭터·몬스터·보스 외형, UI/UX 스타일, VFX·SFX·음악·애니메이션·카메라·조명·후처리·지역 분위기의 최종 결정권은 사용자에게 있다. AI는 후보안과 기술 영향을 제안하며 사용자 승인 전에는 확정·구매·외주·제작 지시로 사용하지 않는다.
+- 고품질 아트의 기본 방향은 포토리얼리즘이 아닌 판타지 이세계풍 스타일라이즈드이며, 저사양 PC 성능을 고려한 LOD·텍스처·셰이더·VFX·컬링을 우선한다.
+- 자동·낮음·중간·높음·사용자 지정 품질 프리셋은 클라이언트 로컬 표현만 조절하며 서버 판정·충돌·점수·출구·협동 조건·랭킹을 변경하지 않는다.
+
 ## 구현 전에 정할 항목
 
 | 영역 | 남은 결정 | 담당 |
@@ -44,9 +51,9 @@
 | 제작 자원 | 직접 제작과 유료 자원 범위·예산·라이선스 | Art, Audio, ThirdParty |
 | 출시 | 실제 공개 챕터 선정, 랭킹·공개 방·채팅 도입 시점, 가격·판매 방식 | Story, Online, Operations |
 | 사양·언어 | 지원 OS·입력 장치·최소 사양·성능 예산·최종 출시 언어 | Player, UI, Localization |
-| 에셋 제작·조달 | 판타지 이세계풍 고품질 스타일라이즈드 방향과 저사양 우선 성능 기준을 포함한 AI 추천 통합안 승인 여부·예외 항목 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), Art, Audio, UI, Player, Monster, Levels |
-| 품질 설정 | 인게임 품질 프리셋·자동 추천·저사양 성능 목표·고급 옵션·실제 최소 사양과 Unity 렌더 파이프라인 | [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Core, Art, Levels |
-| 프론트엔드 표현 결정권 | 캐릭터·몬스터·보스 외형, UI/UX 스타일, VFX·SFX·음악·애니메이션·지역 분위기의 사용자 최종 승인 기록 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Art, Audio |
+| 에셋 제작·조달 | 기본 스타일라이즈드·저사양 우선 원칙은 확정. 세부 제작 방식·조달 조합·예외 항목·최소 사양은 사용자 승인과 프로파일링 후 결정 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), Art, Audio, UI, Player, Monster, Levels |
+| 품질 설정 | 품질 프리셋의 공정성·로컬 적용 원칙은 확정. 실제 최소 사양·렌더 파이프라인·고급 옵션·자동 추천 지표는 검증 후 결정 | [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Core, Art, Levels |
+| 프론트엔드 표현 결정권 | 결정권 정책은 확정. 캐릭터·몬스터·보스·UI·VFX·SFX·음악·애니메이션·지역 분위기의 세부 스타일 승인 기록이 필요 | [DESIGN-0002](DESIGN-0002-CharacterAssetProduction.md), [DESIGN-0003](DESIGN-0003-QualitySettings.md), UI, Art, Audio |
 
 서로 다른 선택이 함께 남아 있던 아이템 전달·협동 도구·일부 지역 기믹은 위 목록으로 관리한다. 미선택 항목과 AI 제안을 확정 기획으로 승격하지 않는다.
 

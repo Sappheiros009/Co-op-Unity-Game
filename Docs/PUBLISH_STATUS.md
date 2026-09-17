@@ -1,40 +1,37 @@
 # 문서 게시 현황
 
-기준일: 2026-09-17. 확정된 질문·선택지·답변을 읽기 쉬운 기획서로 전환하고 GitHub·Notion을 같은 기준으로 갱신했다.
+기준일: 2026-09-18. 확정 기획을 `Plan.md`에 통합하고, 상세 설계·상태·운영 문서의 연결을 정리한 뒤 GitHub와 Notion을 같은 기준으로 갱신했다.
 
 ## 반영 범위
 
-- [통합 기획서](../Plan.md): 16개 주제의 게임 규칙·콘텐츠·서버·저장·운영 명세.
-- [출구와 팀 점수](DESIGN-0001-StageExit.md): 완료된 질문·답변 없이 규칙·예외·검증 사례만 유지.
-- [개발 상태](PROJECT_STATE.md): 미정 수치·정책과 구현 확인 범위를 분리.
-- [구조](ARCHITECTURE.md)·[파이프라인](PIPELINE.md)·[폴더 지도](FOLDER_MAP.md)·기능 README·검사 계약 동기화.
-- [개발 협업 프롬프트](PROJECT_PROMPT.md): 최초 사용자 원문 유지.
+- [통합 기획서](../Plan.md): 게임 규칙·콘텐츠·서버·저장·운영·프론트엔드 원칙을 17개 주제로 통합.
+- [캐릭터·게임 에셋 제작 및 조달](DESIGN-0002-CharacterAssetProduction.md): Blender 제작 순서, 파츠 분리, 에셋 조달·라이선스 기준. 세부 표현은 사용자 승인 대기.
+- [인게임 품질 설정](DESIGN-0003-QualitySettings.md): 품질 프리셋, 저사양 성능, 게임플레이 공정성 기준. 실제 최소 사양과 값은 프로파일링 대기.
+- [문서 목록](README.md)·[폴더 지도](FOLDER_MAP.md)·[개발 상태](PROJECT_STATE.md): 상세 설계 문서를 찾을 수 있도록 연결하고 확정 결정권과 미정 세부 항목을 분리.
+- [개발 협업 프롬프트](PROJECT_PROMPT.md): 사용자가 제공한 원문 참고 문서 유지.
 
 ## GitHub
 
-[기획·관리 문서 게시 커밋](https://github.com/Sappheiros009/Co-op-Unity-Game/commit/b8305b9ff5cc477afcf0a2c3316795b274fc974f)에 검토한 65개 파일을 반영했다. 기존 main 이력을 이어서 갱신했으며 강제 업데이트하지 않았다. 원격 Plan.md를 다시 읽어 로컬 게시본과 완전 일치함을 확인했다.
+- [Plan·통합 문서 구조 정리 커밋](https://github.com/Sappheiros009/Co-op-Unity-Game/commit/45476615feee64cc2a53e8f26fe809b058b16183): `Plan.md`를 17개 주제와 새 상세 설계 링크까지 반영.
+- [Docs 인덱스·상태 정리 커밋](https://github.com/Sappheiros009/Co-op-Unity-Game/commit/67295366a1dec924fa55ec25b7185ce827c08769): `Docs/README.md`, `FOLDER_MAP.md`, `PROJECT_STATE.md` 반영.
+- [프론트엔드 설계 추가 커밋](https://github.com/Sappheiros009/Co-op-Unity-Game/commit/9afde55191d04b588d11bfafcac136aabb9d274e): `DESIGN-0002/0003`과 품질·사용자 결정권 원칙 반영.
 
-[GitHub Actions 실행](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35231874123)은 완료·성공이다. Validate, 검사기 자체 시험, 검증 리포트 업로드가 모두 성공했다. 선택 실행인 출시 준비 job은 실행하지 않았으며 로컬 Readiness는 BLOCKED / 2다.
+모든 변경은 `main`에 직접 반영했으며 강제 업데이트는 사용하지 않았다. 현재 원격 `Plan.md`는 291줄이며 17번 프론트엔드 결정권·품질 설정과 `DESIGN-0002/0003` 링크를 포함한다.
+
+### GitHub Actions
+
+- [Run 5](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35251892943): Docs 정리 커밋에 의해 실행되었으며 이 상태 문서 작성 시점에는 진행 중이었다.
+- [Run 4](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35251837113): 더 최신 커밋이 올라와 취소된 실행이다.
+- [Run 3](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35248222352): 프론트엔드 설계 추가 커밋의 문서 검사·자체 시험 성공 근거.
+
+로컬 최신 검증은 문서 검사 543개 통과·실패 0개, 검사기 자체 테스트 20/20 통과다. 이는 문서·계약·경로 검사 결과이며 Unity 게임 실행·멀티플레이·보안 효과·출시 성공을 의미하지 않는다. 출시 준비 검사는 Unity 프로젝트와 실행 증거가 없어 `BLOCKED / 2`가 정상이다.
 
 ## Notion
 
-| 문서 | 저장한 내용 |
-|---|---|
-| [통합 기획서](https://app.notion.com/p/7d4877dbd26d83ebaadb015fd0708d3e) | 기존 질문지 본문을 제거하고 확정 기획 16개 주제로 교체. 원문 프롬프트·상세 문서 묶음 하위 페이지 보존 |
-| [00 기획 문서 안내](https://app.notion.com/p/3dd877dbd26d81d7ac8cf144fdc3368f) | 읽는 순서와 핵심 규칙 |
-| [01 개발 상태와 상세 결정 목록](https://app.notion.com/p/3dd877dbd26d812c863efbf21023bbf1) | 미정 사항·실제 구현 상태 |
-| [02 출구와 팀 점수 설계](https://app.notion.com/p/3dd877dbd26d81a582f0ddfa64cfcb4c) | 확정 규칙·상태 흐름·검증 사례 |
-| [03 폴더 지도](https://app.notion.com/p/3dd877dbd26d8108ba8de7050419b6b4) | 기능·지역·관리 책임과 증상별 조사 위치 |
-| [04 시스템 구조와 보안 설계](https://app.notion.com/p/3dd877dbd26d81d490c5e2a8ec607c5d) | PlayFab·서버 판정·저장·Steam 제재 경계 |
-| [05 개발·검증·배포 파이프라인](https://app.notion.com/p/3dd877dbd26d81188941e66dd13f0ef2) | 실행 명령·단계별 통과 기준·운영 절차 |
-| [06 프로젝트 작업 원칙](https://app.notion.com/p/3dd877dbd26d81549ef1ccffb18e076b) | 결정·자료·제작·검증 원칙 |
-| [07 폴더 명칭 기준](https://app.notion.com/p/3dd877dbd26d81c0a784f9c1a34f7078) | 확정 명칭과 대소문자 |
-| [08 실제 검증 결과](https://app.notion.com/p/3dd877dbd26d812aa2d1f752f3168914) | 로컬 검사·20개 자체 시험·원격 CI 근거 |
-| [09 확정 기획서 개정 안내](https://app.notion.com/p/3de877dbd26d806da42edda321510454) | 최신 결정 통합과 이전 메모 정리 기준 |
-| [개발 협업 프롬프트 원문](https://app.notion.com/p/aa6877dbd26d8290bf0a812ca2fdb8ee) | 기존 원문 페이지 유지, 본문 변경 없음 |
-
-Notion 본문은 읽기 좋은 명세로 게시하고 상세 파일·README·실행 코드에는 GitHub 링크를 연결했다. 완료된 질문·보기·답변은 현재 게시 문서에서 제거했다. 과거 Git 커밋과 서비스의 정상 복구 이력까지 삭제한 것은 아니다.
+- [통합 기획서](https://app.notion.com/p/7d4877dbd26d83ebaadb015fd0708d3e): 17번 `프론트엔드 결정권 및 품질 설정`을 유지하고, 16번 문서 목록에 `DESIGN-0002/0003` GitHub 링크를 추가했다.
+- Notion 본문은 확정 규칙·책임·검증 기준 중심으로 유지한다. 캐릭터·몬스터·보스 외형, UI/UX, VFX·SFX·음악·애니메이션·카메라·조명·후처리의 세부 표현은 사용자 승인 전 미정으로 남긴다.
+- [개발 협업 프롬프트 원문](https://app.notion.com/p/aa6877dbd26d8290bf0a812ca2fdb8ee)은 참고 문서로 보존하고 확정 기획과 분리한다.
 
 ## 검증의 한계
 
-게시·문서 검사·검사기 자체 시험은 완료했지만 Unity 빌드, 게임 실행·멀티플레이, PlayFab/Steam 런타임 연동, 보안 효과, 실제 게임 배포는 이번 작업에 포함하지 않았다. [실제 검증 기록](Testing/TEST-0001-PlanningPipeline.md)을 함께 확인한다.
+게시·문서 검사·검사기 자체 시험은 완료했지만 Unity 빌드, 게임 실행·멀티플레이, PlayFab/Steam 런타임 연동, 핵 탐지·제재 효과, 실제 게임 배포는 이번 작업에 포함하지 않았다. [실제 검증 기록](Testing/TEST-0001-PlanningPipeline.md)과 GitHub Actions 실행 결과를 함께 확인한다.

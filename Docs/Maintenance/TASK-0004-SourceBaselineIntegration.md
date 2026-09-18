@@ -43,7 +43,7 @@
 
 ## 완료 조건
 
-로컬 소스 재생성·PlayMode 테스트·Windows 빌드·헤드리스 초기 기동·문서 검증과 작업 브랜치 push는 완료했다. 최신 커밋 `9715860`의 GitHub Actions 문서 검증도 성공했다. Pull Request 검토·`main` 병합·Notion 갱신은 이 기준선 바깥의 외부 확인 게이트로 남긴다.
+로컬 소스 재생성·PlayMode 테스트·Windows 빌드·헤드리스 초기 기동·문서 검증과 작업 브랜치 push는 완료했다. 검증 기록 커밋 `4c2edcd`의 GitHub Actions 문서 검증 Run `35347265897`도 성공했다. Pull Request 검토·`main` 병합·Notion 갱신은 이 기준선 바깥의 외부 확인 게이트로 남긴다.
 
 ## 변경 이력
 
@@ -53,5 +53,6 @@
 | 2026-09-18 | 공식 Git으로 `origin/main` 연결, 로컬 프로토타입 통합 커밋 생성 및 작업 브랜치 push | `660b423` / `codex/00-prototype-baseline`; `main` 미변경 |
 | 2026-09-18 | Unity PlayMode·Windows 빌드·헤드리스 기동 최종 재검증 및 증거 갱신 | 테스트 4/4, 빌드 `Succeeded`·오류 0, 런타임 예외 0; 외부 병합·Notion·온라인 서비스는 미검증 |
 | 2026-09-18 | 최신 문서 커밋의 GitHub Actions와 원격 브랜치·main·PR 상태 확인 | Actions Run `35346784505` 성공; 브랜치 `9715860`, `main` `f19a012` 유지; PR 없음 |
+| 2026-09-18 | 최종 상태 기록 커밋과 GitHub Actions 결과 확인 | Actions Run `35347265897` 성공; 검증 기록 커밋 `4c2edcd`, `main` `f19a012` 유지; PR 없음 |
 
 [작업 목록](README.md) · [현재 상태](../PROJECT_STATE.md) · [게시 상태](../PUBLISH_STATUS.md) · [통합 기획서](../../Plan.md)

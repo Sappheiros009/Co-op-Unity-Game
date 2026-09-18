@@ -38,12 +38,12 @@
 
 ## 로컬 후속 구현 상태
 
-GitHub 게시 이후 해당 기획을 바탕으로 AI에게 요청해 로컬 Unity 프로토타입을 제작했다. 이 후속 구현에는 C# 프로토타입 코드, `Packages`, `ProjectSettings`, Windows 시험 빌드가 포함되지만 아직 GitHub `main`과 Notion에 게시하지 않았다.
+GitHub 게시 이후 해당 기획을 바탕으로 AI에게 요청해 로컬 Unity 프로토타입을 제작했다. 이 후속 구현에는 C# 프로토타입 코드, `Packages`, `ProjectSettings`, Windows 시험 빌드가 포함된다. 커밋 `660b423`을 `codex/00-prototype-baseline` 작업 브랜치에 게시했으며 GitHub `main`과 Notion은 아직 갱신하지 않았다.
 
 2026-09-18 Unity 6000.6.1f1에서 16개 `.unity` 씬과 메타데이터를 재생성하고 Build Settings에 등록했다. 현재 소스로 별도 StandaloneWindows64 검증 빌드를 만들었으며 결과는 `Succeeded`, 오류는 0건이다. 새 실행 파일을 헤드리스로 짧게 기동해 엔진·입력·물리 초기화 로그와 예외 부재를 확인했지만 강제 종료한 스모크 검사이므로 화면 전환 전체 회귀를 뜻하지 않는다.
 
-이 로컬 후속 구현과 검증 기록은 아직 GitHub `main`과 Notion에 게시하지 않았다. `Build`·Unity 캐시·`_UnityTemplate`은 게시 대상에서 제외하고, `Assets`·`Packages`·`ProjectSettings`와 관련 문서만 원격 이력에 통합한다. 이 절은 게시 완료 보고가 아니라 원격 기준과 로컬 후속 작업의 차이를 기록한다.
+이 로컬 후속 구현과 검증 기록은 작업 브랜치에 게시했지만 아직 GitHub `main`과 Notion에는 반영하지 않았다. `Build`·Unity 캐시·`_UnityTemplate`은 게시 대상에서 제외하고, `Assets`·`Packages`·`ProjectSettings`와 관련 문서만 작업 브랜치에 통합했다. 이 절은 `main` 병합 전 원격 기준과 로컬 후속 작업의 차이를 기록한다.
 
-2026-09-18 현재 `main` 아카이브와 로컬 파일을 비교한 결과, 원격 파일 67개는 모두 로컬에 존재했고 원격에만 있는 파일은 없었다. 로컬 추가분은 프로토타입 구현·씬·메타데이터·Unity 설정 및 후속 상태 문서다. 로컬 Git에는 아직 원격 URL·커밋 이력이 없고 실행 환경의 Git HTTPS remote helper도 없어 fetch/merge/push는 보류한다.
+2026-09-18 현재 `main` 아카이브와 로컬 파일을 비교한 결과, 원격 파일 67개는 모두 로컬에 존재했고 원격에만 있는 파일은 없었다. 로컬 추가분은 프로토타입 구현·씬·메타데이터·Unity 설정 및 후속 상태 문서다. 공식 Git for Windows로 `origin/main` 커밋 `f19a012d`를 fetch했고, 통합 커밋 `660b423`을 `codex/00-prototype-baseline`에 push했다. `main`은 그대로 유지한다.
 
 로컬 후속 검증으로 `PrototypeExitScoringTests` PlayMode 4개가 모두 통과했으며, 테스트 어셈블리 분리 후 Windows 검증 빌드도 성공했다. 이는 출구 규칙과 로컬 빌드 재현성의 증거이지 서버 권한·멀티플레이·출시 검증의 증거는 아니다.

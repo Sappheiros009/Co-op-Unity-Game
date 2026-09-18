@@ -14,7 +14,7 @@
 | 문서·계약 검사기 | 실행 가능 |
 | 검사기 자기 테스트 | 실행 결과는 [검증 기록](Testing/TEST-0001-PlanningPipeline.md) 참조 |
 | 원격 게시·GitHub Actions | [게시 상태](PUBLISH_STATUS.md)에서 실제 결과 관리 |
-| Unity 프로젝트 | GitHub 기획을 바탕으로 로컬에 프로토타입 코드·`Packages`·`ProjectSettings`를 만들고 16개 씬과 메타데이터를 재생성했으나 아직 GitHub 이력에 통합하지 않음 |
+| Unity 프로젝트 | GitHub 기획을 바탕으로 로컬에 프로토타입 코드·`Packages`·`ProjectSettings`를 만들고 16개 씬과 메타데이터를 재생성했다. `codex/00-prototype-baseline` 커밋 `660b423`으로 게시했으며 `main`은 변경하지 않음 |
 | Unity 6000.6.1f1 | 2026-09-18 현재 소스로 16개 씬 생성·Build Settings 등록·StandaloneWindows64 별도 검증 빌드 성공(`Errors: 0`). 헤드리스 초기 기동 확인, 전체 화면 흐름 수동 회귀는 미실행 |
 | 프로토타입 출구 규칙 테스트 | `PrototypeExitScoringTests` PlayMode 4개 통과. 전체 기능·멀티클라이언트 테스트는 미구현 |
 | PlayFab·Steam 연동 | 서비스 방향 확정. 서버 개설·실제 연동·운영 검증 미실행 |
@@ -22,7 +22,7 @@
 
 ## 로컬 프로토타입 구현과 현재 파일 상태
 
-GitHub `main`은 기획·폴더 골격의 기준 이력이고, 이 작업공간의 Unity 프로토타입은 해당 기획을 바탕으로 AI에게 요청해 로컬에서 제작한 후속 구현이다. 원격에는 아직 게시되지 않았다.
+GitHub `main`은 기획·폴더 골격의 기준 이력이고, 이 작업공간의 Unity 프로토타입은 해당 기획을 바탕으로 AI에게 요청해 제작한 후속 구현이다. 후속 구현은 `codex/00-prototype-baseline` 브랜치의 커밋 `660b423`으로 원격에 게시했으며 `main` 반영과 Notion 갱신은 별도 검토 대상이다.
 
 - `Assets/Game/Core/Prototype`, `Assets/Game/Features`, `Assets/Game/Editor`에 로비·대기실·Chapter01~07·스토리 인터루드 흐름을 생성하고 실행하는 C# 프로토타입 코드가 있습니다.
 - 기존 작업 기록과 `Build/SlimeCoopPrototype.provenance.json`은 과거 Unity 6000.6.1f1 Windows 빌드 성공을 증명합니다.

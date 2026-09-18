@@ -8,8 +8,8 @@
 - 담당 폴더·실제 파일: `Assets/Game/Features/StartandExit/PrototypeExitScoring.cs`, `Assets/Game/Core/Prototype/PrototypeParticipant.cs`, `Assets/Game/Tests/PrototypeExitScoringTests.cs`
 - 기획 근거: [출구와 팀 점수 설계](../DESIGN-0001-StageExit.md), [통합 기획서](../../Plan.md)
 - 실행 환경: Unity 6000.6.1f1, Windows, Unity Test Framework, PlayMode
-- 실행 명령: `unity test <project> --editor-version 6000.6.1f1 --mode PlayMode --report-format junit --output tmp/exit-tests.junit.xml`
-- 원본 결과: `tmp/exit-tests.junit.xml` — tests 4, failures 0, errors 0, skipped 0, 5.181초
+- 실행 명령: `unity test <project> --editor-version 6000.6.1f1 --mode PlayMode --report-format junit --output tmp/exit-tests-final.junit.xml`
+- 최종 결과: `tmp/exit-tests-final.junit.xml` — tests 4, failures 0, errors 0, skipped 0, 5.184초
 
 ## 검증 내용
 

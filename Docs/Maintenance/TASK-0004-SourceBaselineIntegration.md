@@ -1,6 +1,6 @@
 # TASK-0004 — GitHub 기획 기준과 로컬 Unity 프로토타입 소스 통합 준비
 
-- 상태: 검증 대기
+- 상태: 로컬 검증 완료 · 외부 확인 대기
 - 우선순위: P0 기준선 정리
 - 작성·변경일: 2026-09-18
 - 담당 위치: 프로젝트 전체, `Assets`, `Packages`, `ProjectSettings`, `Docs`
@@ -31,19 +31,19 @@
 ## 완료 확인
 
 - 실행 환경: Unity 6000.6.1f1, Unity CLI 1.0.0-beta.8, Windows StandaloneWindows64.
-- 씬 생성: `SlimeCoop.Prototype.Editor.PrototypeSceneBuilder.BuildScenes` 성공. `.unity` 16개, C# 15개 모두 `.meta` 보유, Build Settings 16개 등록.
-- 규칙 테스트: PlayMode 4개 통과(`tests=4`, `failures=0`, `errors=0`, `skipped=0`). 세부 결과는 [TEST-0002](../Testing/TEST-0002-PrototypeExitRules.md).
-- 현재 소스 빌드: `SlimeCoop.Prototype.Editor.PrototypeBuild.BuildWindows`를 `Build/Verification/SlimeCoopPrototype.exe`로 별도 실행. `Succeeded`, `Errors: 0`, 검증 폴더 파일 225개, 107,054,791바이트.
-- 초기 기동: 검증 빌드를 `-batchmode -nographics`로 12초 실행. Unity 6000.6.1f1, Input System, PhysX, Null graphics device 초기화 후 검사기가 종료했으며 로그에 관리 예외나 크래시는 없었다. 종료 코드 `-1`은 12초 제한 후 검사기가 프로세스를 강제 종료한 결과다.
+- 씬 생성: `SlimeCoop.Prototype.Editor.PrototypeSceneBuilder.BuildScenes` 성공. `.unity` 16개, C# 16개 모두 `.meta` 보유, Build Settings 16개 등록.
+- 규칙 테스트: 최종 재실행에서 PlayMode 4개 통과(`tests=4`, `failures=0`, `errors=0`, `skipped=0`, 5.184초). 세부 결과는 [TEST-0002](../Testing/TEST-0002-PrototypeExitRules.md).
+- 현재 소스 빌드: `SlimeCoop.Prototype.Editor.PrototypeBuild.BuildWindows`를 `Build/Verification/SlimeCoopPrototype.exe`로 별도 실행. `Succeeded`, `Errors: 0`, 검증 폴더 파일 227개, 107,054,900바이트. 실행 파일 SHA-256은 `07534CC5839D2C89C4FE45EC272C91B046FF3D64F14AB3F0A32221121E0FFFF2`다.
+- 초기 기동: 최종 검증 빌드를 `-batchmode -nographics`로 12초 실행했다. Unity 6000.6.1f1, Input System, PhysX, Null graphics device 초기화를 확인했고 25줄 로그에서 `Exception`, `Crash`, `Error`가 0건이었다. 종료 코드 `-1`은 12초 제한 후 검사기가 프로세스를 강제 종료한 결과다.
 - 기획 검사: 최종 문서 상태에서 578개 통과·실패 0개. 검사기 자체 시험 20/20 통과.
-- 출시 준비 검사: `BLOCKED / 2`. 9개 기획 결정, 자동화된 Unity EditMode·PlayMode·멀티클라이언트·재현 빌드 단계, 서버·Steam·운영·출시 검증이 남아 있다. 이번 수동 검증 빌드는 성공했지만 아직 출시 준비 파이프라인의 재현 빌드 단계로 연결되지 않았다.
-- 증거 위치: `Logs/scene-regeneration.log`, `Logs/verification-build.log`, `Build/Verification/smoke-player.log`. 모두 로컬 검증 산출물이며 Git에는 포함하지 않는다.
+- 출시 준비 검사: `BLOCKED / 2`. 9개 미정 결정과 자동화된 Unity EditMode·PlayMode·멀티클라이언트·재현 빌드 단계, 서버·Steam·운영·출시 검증이 남아 있다. 이번 수동 검증 빌드는 성공했지만 아직 출시 준비 파이프라인의 재현 빌드 단계로 연결되지 않았다.
+- 최종 증거 위치: `tmp/exit-tests-final.junit.xml`, `Logs/verification-build-final.log`, `Logs/smoke-player-final.unity.log`. 모두 로컬 검증 산출물이며 Git에는 포함하지 않는다.
 - 아직 확인하지 않은 범위: 로비→대기실→각 챕터→스토리 인터루드→대기실의 수동 전체 회귀, 실제 네트워크·PlayFab·Steam, 원격 Git 병합·CI·Notion 게시, 최종 에셋·성능.
-- 이번 실행은 PlayMode 출구 규칙 4개에 한정한다. 전체 기능의 EditMode/PlayMode 회귀와 멀티클라이언트 테스트는 아직 없다.
+- 이번 실행은 PlayMode 출구 규칙 4개와 Windows 빌드·12초 헤드리스 초기 기동에 한정한다. 전체 기능의 EditMode/PlayMode 회귀와 멀티클라이언트 테스트는 아직 없다.
 
 ## 완료 조건
 
-현재 소스 재생성·테스트·빌드 검증과 작업 브랜치 push는 완료했다. Pull Request 검토·GitHub Actions 결과·`main` 병합·Notion 갱신 전까지 작업 상태는 `검증 대기`로 유지한다.
+로컬 소스 재생성·PlayMode 테스트·Windows 빌드·헤드리스 초기 기동·문서 검증과 작업 브랜치 push는 완료했다. Pull Request 검토·GitHub Actions 결과·`main` 병합·Notion 갱신은 이 기준선 바깥의 외부 확인 게이트로 남긴다.
 
 ## 변경 이력
 
@@ -51,5 +51,6 @@
 |---|---|---|
 | 2026-09-18 | 원격 기획과 로컬 구현의 기준 관계 명시, 씬·메타데이터 재생성, 별도 Windows 빌드와 헤드리스 초기 기동 검증 | 씬 16개, C# 메타 누락 0, 빌드 오류 0; 원격 통합은 대기 |
 | 2026-09-18 | 공식 Git으로 `origin/main` 연결, 로컬 프로토타입 통합 커밋 생성 및 작업 브랜치 push | `660b423` / `codex/00-prototype-baseline`; `main` 미변경 |
+| 2026-09-18 | Unity PlayMode·Windows 빌드·헤드리스 기동 최종 재검증 및 증거 갱신 | 테스트 4/4, 빌드 `Succeeded`·오류 0, 런타임 예외 0; 외부 병합·CI·Notion·온라인 서비스는 미검증 |
 
 [작업 목록](README.md) · [현재 상태](../PROJECT_STATE.md) · [게시 상태](../PUBLISH_STATUS.md) · [통합 기획서](../../Plan.md)

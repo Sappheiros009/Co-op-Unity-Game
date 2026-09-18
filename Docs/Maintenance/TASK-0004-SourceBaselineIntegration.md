@@ -38,12 +38,12 @@
 - 기획 검사: 최종 문서 상태에서 578개 통과·실패 0개. 검사기 자체 시험 20/20 통과.
 - 출시 준비 검사: `BLOCKED / 2`. 9개 미정 결정과 자동화된 Unity EditMode·PlayMode·멀티클라이언트·재현 빌드 단계, 서버·Steam·운영·출시 검증이 남아 있다. 이번 수동 검증 빌드는 성공했지만 아직 출시 준비 파이프라인의 재현 빌드 단계로 연결되지 않았다.
 - 최종 증거 위치: `tmp/exit-tests-final.junit.xml`, `Logs/verification-build-final.log`, `Logs/smoke-player-final.unity.log`. 모두 로컬 검증 산출물이며 Git에는 포함하지 않는다.
-- 아직 확인하지 않은 범위: 로비→대기실→각 챕터→스토리 인터루드→대기실의 수동 전체 회귀, 실제 네트워크·PlayFab·Steam, 원격 Git 병합·CI·Notion 게시, 최종 에셋·성능.
+- 아직 확인하지 않은 범위: 로비→대기실→각 챕터→스토리 인터루드→대기실의 수동 전체 회귀, 실제 네트워크·PlayFab·Steam, 원격 Git 병합·Notion 게시, 최종 에셋·성능.
 - 이번 실행은 PlayMode 출구 규칙 4개와 Windows 빌드·12초 헤드리스 초기 기동에 한정한다. 전체 기능의 EditMode/PlayMode 회귀와 멀티클라이언트 테스트는 아직 없다.
 
 ## 완료 조건
 
-로컬 소스 재생성·PlayMode 테스트·Windows 빌드·헤드리스 초기 기동·문서 검증과 작업 브랜치 push는 완료했다. Pull Request 검토·GitHub Actions 결과·`main` 병합·Notion 갱신은 이 기준선 바깥의 외부 확인 게이트로 남긴다.
+로컬 소스 재생성·PlayMode 테스트·Windows 빌드·헤드리스 초기 기동·문서 검증과 작업 브랜치 push는 완료했다. 최신 커밋 `9715860`의 GitHub Actions 문서 검증도 성공했다. Pull Request 검토·`main` 병합·Notion 갱신은 이 기준선 바깥의 외부 확인 게이트로 남긴다.
 
 ## 변경 이력
 
@@ -51,6 +51,7 @@
 |---|---|---|
 | 2026-09-18 | 원격 기획과 로컬 구현의 기준 관계 명시, 씬·메타데이터 재생성, 별도 Windows 빌드와 헤드리스 초기 기동 검증 | 씬 16개, C# 메타 누락 0, 빌드 오류 0; 원격 통합은 대기 |
 | 2026-09-18 | 공식 Git으로 `origin/main` 연결, 로컬 프로토타입 통합 커밋 생성 및 작업 브랜치 push | `660b423` / `codex/00-prototype-baseline`; `main` 미변경 |
-| 2026-09-18 | Unity PlayMode·Windows 빌드·헤드리스 기동 최종 재검증 및 증거 갱신 | 테스트 4/4, 빌드 `Succeeded`·오류 0, 런타임 예외 0; 외부 병합·CI·Notion·온라인 서비스는 미검증 |
+| 2026-09-18 | Unity PlayMode·Windows 빌드·헤드리스 기동 최종 재검증 및 증거 갱신 | 테스트 4/4, 빌드 `Succeeded`·오류 0, 런타임 예외 0; 외부 병합·Notion·온라인 서비스는 미검증 |
+| 2026-09-18 | 최신 문서 커밋의 GitHub Actions와 원격 브랜치·main·PR 상태 확인 | Actions Run `35346784505` 성공; 브랜치 `9715860`, `main` `f19a012` 유지; PR 없음 |
 
 [작업 목록](README.md) · [현재 상태](../PROJECT_STATE.md) · [게시 상태](../PUBLISH_STATUS.md) · [통합 기획서](../../Plan.md)

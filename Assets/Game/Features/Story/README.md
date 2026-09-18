@@ -20,10 +20,11 @@
 
 ## 구현 파일 안내
 
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+현재 프로토타입은 챕터 종료 후 영상 삽입 위치로 이동하는 컷신 placeholder만 제공합니다. 실제 영상·자막·타임라인은 사용자 승인 후 추가합니다.
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeStoryInterludeController.cs` | 챕터별 스토리 영상 placeholder 화면과 대기실 복귀 | `PrototypeStoryInterlude_Chapter0X.unity` 실행 후 Continue 조작 |
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 

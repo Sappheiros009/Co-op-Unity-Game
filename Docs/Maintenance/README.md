@@ -19,5 +19,8 @@ P0 게임 실행·핵심 기능 필수 / P1 출시 필수 / P2 출시 품질 향
 | ID | 작업 | 상태 | 담당 위치 |
 |---|---|---|---|
 | [TASK-0001](TASK-0001-ProjectStructure.md) | 사용자 지정 폴더명과 프로젝트·관리 지침 반영 | 완료 | 프로젝트 전체 문서와 폴더 |
+| [TASK-0002](TASK-0002-PrototypeScenes.md) | 로비·대기실·Chapter01 프로토타입 씬 제작 | 완료 | Unity 프로젝트·Core·Features·Levels |
+| [TASK-0003](TASK-0003-ChapterPrototypeFlow.md) | Chapter01~07 및 스토리 컷신 프로토타입 흐름 | 완료 | Unity 프로젝트·Core·Features·Levels |
+| [TASK-0004](TASK-0004-SourceBaselineIntegration.md) | GitHub 기획 기준과 로컬 Unity 프로토타입 소스 통합 준비 | 검증 대기 | 프로젝트 전체·Unity 프로젝트·게시 상태 |
 
 [폴더 지도](../FOLDER_MAP.md) · [작업 원칙](../WORKING_PRINCIPLES.md) · [버그 관리](../Bugs/README.md) · [운영 관리](../Operations/README.md)

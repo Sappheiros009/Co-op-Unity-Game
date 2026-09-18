@@ -4,7 +4,7 @@
 
 정화 장치의 분담 조작과 오염 수위 변화, 안전 게이지와 지속 피해를 다루는 지역입니다.
 
-위 내용은 읽은 기획서의 선택 답변을 근거로 한 제작 범위 안내입니다. 현재 씬·맵·프리팹은 없으며 구현 완료를 뜻하지 않습니다.
+현재 프로토타입은 공통 3D 테스트 경로에 오염 지대의 녹색 계열 색상 팔레트만 적용합니다. 챕터 종료 후 `PrototypeStoryInterlude_Chapter03`를 거쳐 대기실로 돌아갑니다.
 
 ## 여기에 둘 파일
 
@@ -29,5 +29,7 @@
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeChapter03.unity` | 저장형 오염 지대 3D 테스트 씬 | 대기실에서 Chapter 03 선택 |
+| `PrototypeStoryInterlude_Chapter03.unity` | Chapter03 종료 후 영상 삽입용 placeholder | 챕터 종료 후 자동 이동 |
 
 [전체 폴더 지도](../../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../../Docs/Bugs/BUG_TEMPLATE.md)

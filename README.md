@@ -18,7 +18,7 @@
 
 ## 현재 범위
 
-기획 문서, 기능·지역별 폴더 안내, 운영 양식과 기획 검사기를 관리한다. Unity 게임 코드·씬·Packages·ProjectSettings는 아직 없다. PlayFab·Steam 연동과 실제 게임 빌드·배포도 아직 수행하지 않았다.
+GitHub의 기획 기준을 바탕으로 로컬 컴퓨터에 Unity 프로토타입 코드·`Packages`·`ProjectSettings`와 Windows 시험 빌드를 생성한 상태다. 이 로컬 구현은 아직 GitHub 이력에 통합되지 않았다. 2026-09-18에 Unity 6000.6.1f1로 16개 `.unity` 씬과 메타데이터를 재생성하고 현재 소스의 별도 Windows 검증 빌드를 성공했으며, 헤드리스 초기 기동 로그에서 엔진·물리·입력 초기화까지 확인했다. 버튼 전환 전체 회귀, PlayFab·Steam 연동, 실제 멀티플레이와 출시는 여전히 미검증·미배포다.
 
 ## 문서 검사
 
@@ -30,7 +30,7 @@ pwsh -NoProfile -File ./Docs/Testing/Test-ProjectPipeline.ps1
 pwsh -NoProfile -File ./ProjectPipeline.ps1 -Mode Readiness
 ```
 
-Validate는 문서·계약·경로 검사다. Readiness는 게임·출시 증거가 없어 현재 BLOCKED가 정상이다.
+Validate는 문서·계약·경로 검사다. Readiness는 미정 결정, 재현 가능한 Unity 테스트·빌드, 서버·출시 검증이 없어 현재 BLOCKED가 정상이다.
 
 ## 작업 지시
 

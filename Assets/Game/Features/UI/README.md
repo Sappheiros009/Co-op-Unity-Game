@@ -21,12 +21,15 @@
 
 작업 지시 예시: “UI에서 조준 대상 이름과 조작 키 안내가 겹치는 현상을 해상도·언어별로 확인해주세요.”
 
-## 구현 파일 안내
-
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+## 현재 프로토타입 구현 파일
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeLobbyController.cs` | 2D 로비 표현 초기화, 게임 시작 조작, 대기실 씬 전환 | `PrototypeLobby.unity` 실행 및 Enter/Start 조작 |
+| `PrototypeWaitingRoomController.cs` | 3D 슬라임 대기실 표현 초기화, Chapter01~07 선택 조작 | `PrototypeWaitingRoom.unity` 실행 및 챕터 버튼 조작 |
+| `PrototypeHud.cs` | Chapter01~07의 상태·출구·점수 안내 오버레이와 컷신 전환 안내 | 각 `PrototypeChapter0X.unity` 실행 |
+
+공통 2D 스프라이트·카메라·캡슐 생성 보조는 `Assets/Game/Core/Prototype/PrototypeVisuals.cs`에 있습니다. 현재 UI는 흐름 확인용 오버레이이며, 최종 색상·폰트·레이아웃·아이콘 스타일은 사용자 승인 후 결정합니다.
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 

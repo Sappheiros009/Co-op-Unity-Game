@@ -7,11 +7,15 @@
 - [StartandExit — 회차 진행](../Features/StartandExit/README.md)
 - [Features — 기능 담당 목록](../Features/README.md)
 
-## 파일과 작업 안내
-
-현재는 폴더 안내 단계입니다. 실제 파일을 추가할 때 아래 표에 경로·역할·확인 방법을 함께 기록합니다.
+## 현재 프로토타입 파일
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `Prototype/PrototypeGame.cs` | Chapter01 로컬 프로토타입 흐름과 상태 표시를 조정 | `PrototypeChapter01.unity` 실행 |
+| `Prototype/PrototypeParticipant.cs` | 프로토타입 참가자 상태와 출구 진입 표시를 연결 | Chapter01에서 캡슐 참가자 상태 확인 |
+| `Prototype/PrototypeVisuals.cs` | 캡슐·기본 재질·3D 카메라·2D 직교 카메라·스프라이트 생성 보조 | Lobby·WaitingRoom·Chapter01 실행 |
+| `Prototype/PrototypeChapterCatalog.cs` | Chapter01~07 씬 이름·지역명·placeholder 색상·스토리 씬 연결을 단일 기준으로 관리 | 대기실 챕터 선택과 챕터 씬 생성 결과 대조 |
+
+현재 코드는 로컬 프로토타입 공통 기반입니다. 서버 권한·실제 네트워크 상태의 소유권을 대체하지 않습니다.
 
 [전체 폴더 지도](../../../Docs/FOLDER_MAP.md) · [작업 기록 양식](../../../Docs/Maintenance/TASK_TEMPLATE.md)

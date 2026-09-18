@@ -8,3 +8,15 @@
 /Obj/
 /Logs/
 /UserSettings/
+
+# Local Unity build outputs and the temporary project used to generate the prototype.
+/Build/
+/_UnityTemplate/
+
+# IDE-generated files.
+/.vs/
+/*.csproj
+/*.sln
+/*.slnx
+/*.suo
+/*.user

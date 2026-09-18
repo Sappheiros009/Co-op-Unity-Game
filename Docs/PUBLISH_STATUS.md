@@ -24,7 +24,7 @@
 - [Run 4](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35251837113): 더 최신 커밋이 올라와 취소된 실행이다.
 - [Run 3](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35248222352): 프론트엔드 설계 추가 커밋의 문서 검사·자체 시험 성공 근거.
 
-로컬 최신 검증은 문서 검사 543개 통과·실패 0개, 검사기 자체 테스트 20/20 통과다. 이는 문서·계약·경로 검사 결과이며 Unity 게임 실행·멀티플레이·보안 효과·출시 성공을 의미하지 않는다. 출시 준비 검사는 Unity 프로젝트와 실행 증거가 없어 `BLOCKED / 2`가 정상이다.
+로컬 최신 검증은 문서 검사 578개 통과·실패 0개, 검사기 자체 테스트 20/20 통과다. 이는 문서·계약·경로 검사 결과다. 출시 준비 검사는 9개 미정 결정과 자동화된 Unity 테스트·재현 빌드 단계, 서버·Steam·운영·출시 검증이 남아 `BLOCKED / 2`가 정상이다.
 
 ## Notion
 
@@ -34,4 +34,16 @@
 
 ## 검증의 한계
 
-게시·문서 검사·검사기 자체 시험은 완료했지만 Unity 빌드, 게임 실행·멀티플레이, PlayFab/Steam 런타임 연동, 핵 탐지·제재 효과, 실제 게임 배포는 이번 작업에 포함하지 않았다. [실제 검증 기록](Testing/TEST-0001-PlanningPipeline.md)과 GitHub Actions 실행 결과를 함께 확인한다.
+원격 게시 기준선에서는 Unity 빌드와 게임 실행을 확인하지 않았다. 이후 로컬 후속 구현에서 Windows 검증 빌드와 헤드리스 초기 기동까지 확인했지만 화면 흐름 전체 회귀·멀티플레이·PlayFab/Steam 런타임 연동·핵 탐지와 제재 효과·실제 게임 배포는 확인하지 않았다. [실제 검증 기록](Testing/TEST-0001-PlanningPipeline.md), [TASK-0004](Maintenance/TASK-0004-SourceBaselineIntegration.md), GitHub Actions 실행 결과를 구분해 확인한다.
+
+## 로컬 후속 구현 상태
+
+GitHub 게시 이후 해당 기획을 바탕으로 AI에게 요청해 로컬 Unity 프로토타입을 제작했다. 이 후속 구현에는 C# 프로토타입 코드, `Packages`, `ProjectSettings`, Windows 시험 빌드가 포함되지만 아직 GitHub `main`과 Notion에 게시하지 않았다.
+
+2026-09-18 Unity 6000.6.1f1에서 16개 `.unity` 씬과 메타데이터를 재생성하고 Build Settings에 등록했다. 현재 소스로 별도 StandaloneWindows64 검증 빌드를 만들었으며 결과는 `Succeeded`, 오류는 0건이다. 새 실행 파일을 헤드리스로 짧게 기동해 엔진·입력·물리 초기화 로그와 예외 부재를 확인했지만 강제 종료한 스모크 검사이므로 화면 전환 전체 회귀를 뜻하지 않는다.
+
+이 로컬 후속 구현과 검증 기록은 아직 GitHub `main`과 Notion에 게시하지 않았다. `Build`·Unity 캐시·`_UnityTemplate`은 게시 대상에서 제외하고, `Assets`·`Packages`·`ProjectSettings`와 관련 문서만 원격 이력에 통합한다. 이 절은 게시 완료 보고가 아니라 원격 기준과 로컬 후속 작업의 차이를 기록한다.
+
+2026-09-18 현재 `main` 아카이브와 로컬 파일을 비교한 결과, 원격 파일 67개는 모두 로컬에 존재했고 원격에만 있는 파일은 없었다. 로컬 추가분은 프로토타입 구현·씬·메타데이터·Unity 설정 및 후속 상태 문서다. 로컬 Git에는 아직 원격 URL·커밋 이력이 없고 실행 환경의 Git HTTPS remote helper도 없어 fetch/merge/push는 보류한다.
+
+로컬 후속 검증으로 `PrototypeExitScoringTests` PlayMode 4개가 모두 통과했으며, 테스트 어셈블리 분리 후 Windows 검증 빌드도 성공했다. 이는 출구 규칙과 로컬 빌드 재현성의 증거이지 서버 권한·멀티플레이·출시 검증의 증거는 아니다.

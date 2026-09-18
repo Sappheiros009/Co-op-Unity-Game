@@ -1,0 +1,23 @@
+{
+  "name": "SlimeCoop.Prototype.Tests",
+  "rootNamespace": "SlimeCoop.Prototype.Tests",
+  "references": [
+    "GUID:c805d742fce44037a5ba9934688813d9"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [
+    "nunit.framework.dll"
+  ],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false,
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ]
+}

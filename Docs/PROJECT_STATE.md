@@ -14,12 +14,26 @@
 | 문서·계약 검사기 | 실행 가능 |
 | 검사기 자기 테스트 | 실행 결과는 [검증 기록](Testing/TEST-0001-PlanningPipeline.md) 참조 |
 | 원격 게시·GitHub Actions | [게시 상태](PUBLISH_STATUS.md)에서 실제 결과 관리 |
-| Unity 프로젝트 | ProjectSettings·Packages·게임 코드·씬 없음 |
-| Unity 6000.6.1f1 | 문서상 목표 버전. 설치·패키지 호환·빌드 미검증 |
+| Unity 프로젝트 | GitHub 기획을 바탕으로 로컬에 프로토타입 코드·`Packages`·`ProjectSettings`를 만들고 16개 씬과 메타데이터를 재생성했으나 아직 GitHub 이력에 통합하지 않음 |
+| Unity 6000.6.1f1 | 2026-09-18 현재 소스로 16개 씬 생성·Build Settings 등록·StandaloneWindows64 별도 검증 빌드 성공(`Errors: 0`). 헤드리스 초기 기동 확인, 전체 화면 흐름 수동 회귀는 미실행 |
+| 프로토타입 출구 규칙 테스트 | `PrototypeExitScoringTests` PlayMode 4개 통과. 전체 기능·멀티클라이언트 테스트는 미구현 |
 | PlayFab·Steam 연동 | 서비스 방향 확정. 서버 개설·실제 연동·운영 검증 미실행 |
-| 게임 플레이·멀티플레이·출시 | 미검증·미배포 |
+| 게임 플레이·멀티플레이·출시 | 캡슐 기반 로컬 프로토타입만 구현. PlayFab·Steam 연동·실제 멀티플레이·출시 미검증·미배포 |
 
-다른 위치의 기존 구현 완료 기록을 이 저장소에서 확인한 실행 결과로 취급하지 않는다. 기존 해결 기록은 유지하고 재검증 결과를 별도로 연결한다.
+## 로컬 프로토타입 구현과 현재 파일 상태
+
+GitHub `main`은 기획·폴더 골격의 기준 이력이고, 이 작업공간의 Unity 프로토타입은 해당 기획을 바탕으로 AI에게 요청해 로컬에서 제작한 후속 구현이다. 원격에는 아직 게시되지 않았다.
+
+- `Assets/Game/Core/Prototype`, `Assets/Game/Features`, `Assets/Game/Editor`에 로비·대기실·Chapter01~07·스토리 인터루드 흐름을 생성하고 실행하는 C# 프로토타입 코드가 있습니다.
+- 기존 작업 기록과 `Build/SlimeCoopPrototype.provenance.json`은 과거 Unity 6000.6.1f1 Windows 빌드 성공을 증명합니다.
+- 2026-09-18 Unity 6000.6.1f1에서 `PrototypeSceneBuilder.BuildScenes`를 실행해 `PrototypeLobby.unity`, `PrototypeWaitingRoom.unity`, `PrototypeChapter01~07.unity`, `PrototypeStoryInterlude_Chapter01~07.unity` 총 16개 씬과 메타데이터를 재생성했습니다.
+- `ProjectSettings/EditorBuildSettings.asset`은 로비·대기실·챕터와 스토리 인터루드를 흐름 순서대로 16개 등록합니다. 현재 소스의 별도 Windows 검증 빌드는 `Errors: 0`으로 성공했습니다.
+- 프로토타입 흐름은 `Lobby → WaitingRoom → 선택한 Chapter01~07 → 해당 StoryInterlude → WaitingRoom`입니다. 챕터 출구 집계가 끝나면 컷신 placeholder로 자동 이동하고, 컷신에서 계속하기를 누르면 대기실로 돌아옵니다.
+- `PrototypeSceneBuilder`는 오브젝트·카메라·조명·placeholder 재질/스프라이트와 16개 씬을 생성하고 Build Settings에 등록합니다. `PrototypeBuild`로 현재 소스의 Windows 검증 빌드를 재현했습니다.
+- 캡슐·기본 색상·임시 2D 장식은 기능 확인용 placeholder입니다. 최종 캐릭터·몬스터·UI·VFX·SFX·조명·후처리 스타일은 사용자 승인 전까지 확정하지 않습니다.
+- 이 구현은 서버 권한, Steam 인증·제재, PlayFab 운영, 실제 네트워크 동기화 또는 저사양 성능 목표를 충족했다는 의미가 아닙니다. 각 항목은 별도 검증 대상으로 유지합니다.
+
+기존 구현 완료 기록과 빌드 산출물은 당시 결과의 증거로 보존하며, 현재 파일 상태의 새 검증은 [TASK-0004](Maintenance/TASK-0004-SourceBaselineIntegration.md)에 별도로 연결한다. 씬·메타데이터 재생성·컴파일·빌드·헤드리스 초기 기동은 확인했지만 화면 흐름 전체의 수동 회귀 결과로 확대 해석하지 않는다.
 
 ## 확정된 운영·사용자 결정
 

@@ -10,11 +10,14 @@
 - [Episode01 — 첫 에피소드](Episode01/README.md)
 - [Sandbox — 시험 공간](Sandbox/README.md)
 
-## 실제 파일과 확인 방법
+## 현재 프로토타입 파일
 
-현재는 폴더 안내 단계입니다. 씬·프리팹·설정이 추가되면 아래 표를 갱신합니다.
-
-| 실제 파일 | 역할 | 확인 방법 |
+| Unity 프로젝트 경로 | 역할 | 확인 방법 |
 |---|---|---|
+| `Assets/Game/Levels/Lobby/PrototypeLobby.unity` | 저장된 카메라·SpriteRenderer 기반 2D 로비 | `PrototypeSceneBuilder.BuildScenes` 실행 후 Scene 뷰와 플레이 확인 |
+| `Assets/Game/Levels/Lobby/PrototypeWaitingRoom.unity` | 저장된 카메라·조명·기하·캡슐 기반 3D 슬라임 대기실 | Scene 뷰 또는 로비에서 대기실로 전환 |
+| `Assets/Game/Levels/Episode01/Chapter01_Mine/PrototypeChapter01.unity` | 저장된 카메라·조명·기하·캡슐 기반 3D Chapter01 광산 테스트 맵 | Scene 뷰 또는 대기실에서 Chapter01 시작 |
+
+씬·배치는 현재 프로토타입 범위에서 씬 파일에 저장되어 Editor의 Scene 뷰에서 Play 없이 확인할 수 있습니다. Play 시에는 저장된 배치를 재연결하며, 정식 지역 제작물과 출시 챕터 포함 여부는 별도 결정합니다.
 
 [전체 폴더 지도](../../../Docs/FOLDER_MAP.md) · [작업 기록 양식](../../../Docs/Maintenance/TASK_TEMPLATE.md)

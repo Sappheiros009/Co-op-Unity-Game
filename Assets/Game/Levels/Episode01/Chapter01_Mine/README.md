@@ -4,7 +4,14 @@
 
 관리자의 시선을 피해 이동하고 부모의 흔적과 첫 조각 단서를 찾는 지역입니다.
 
-위 내용은 읽은 기획서의 선택 답변을 근거로 한 제작 범위 안내입니다. 현재 씬·맵·프리팹은 없으며 구현 완료를 뜻하지 않습니다.
+현재 프로토타입은 3D 광산형 테스트 맵과 캡슐 플레이어·동료·몬스터·출구를 포함합니다. Chapter01 전용 색상 팔레트를 적용하며, 출구 집계 후 `PrototypeStoryInterlude_Chapter01`을 거쳐 대기실로 돌아갑니다.
+
+## 현재 프로토타입
+
+- `PrototypeChapter01.unity`는 3D 원근 카메라를 사용합니다.
+- `PrototypeSceneBuilder`가 바닥·벽·장애물·위험 요소·시작 지점·출구와 캡슐 배치를 씬 파일에 저장합니다. `PrototypeMapBuilder`는 Play 시 저장된 오브젝트를 재연결하고, 저장되지 않은 구형 씬에서는 보정 생성합니다.
+- 플레이어·동료·몬스터는 모두 기능 검증용 캡슐 placeholder입니다.
+- 맵은 고정형 테스트 구성입니다. 정식 랜덤 생성, 실제 네트워크 동기화, 최종 아트·보스·서사 콘텐츠는 아직 구현·검증하지 않았습니다.
 
 ## 여기에 둘 파일
 
@@ -29,5 +36,8 @@
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeChapter01.unity` | Chapter01 3D 테스트 씬 | `PrototypeSceneBuilder.BuildScenes` 실행 후 플레이 |
+| `PrototypeMapBuilder.cs` | 3D 광산 테스트 맵의 저장 배치 재연결 및 누락 시 보정 생성 | Scene 뷰에서 배치를 확인하고 Chapter01에서 시작점·출구·장애물 실행 확인 |
+| `PrototypeChapter01.unity` | Chapter01 저장형 3D 테스트 씬 | 대기실에서 Chapter 01 선택 후 출구 집계 확인 |
 
 [전체 폴더 지도](../../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../../Docs/Bugs/BUG_TEMPLATE.md)

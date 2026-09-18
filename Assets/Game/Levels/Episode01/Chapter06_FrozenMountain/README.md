@@ -4,7 +4,7 @@
 
 미끄러운 바닥에서 서로 지탱하는 플레이와 부모 사건·고향·귀향패의 진실 공개를 다루는 지역입니다. FrozenMountain은 사용자가 정한 폴더명이며 세부 지형은 제작 시 확정합니다.
 
-위 내용은 읽은 기획서의 선택 답변을 근거로 한 제작 범위 안내입니다. 현재 씬·맵·프리팹은 없으며 구현 완료를 뜻하지 않습니다.
+현재 프로토타입은 공통 3D 테스트 경로에 얼어붙은 산의 빙청색 계열 색상 팔레트만 적용합니다. 챕터 종료 후 `PrototypeStoryInterlude_Chapter06`를 거쳐 대기실로 돌아갑니다.
 
 ## 여기에 둘 파일
 
@@ -29,5 +29,7 @@
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeChapter06.unity` | 저장형 얼어붙은 산 3D 테스트 씬 | 대기실에서 Chapter 06 선택 |
+| `PrototypeStoryInterlude_Chapter06.unity` | Chapter06 종료 후 영상 삽입용 placeholder | 챕터 종료 후 자동 이동 |
 
 [전체 폴더 지도](../../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../../Docs/Bugs/BUG_TEMPLATE.md)

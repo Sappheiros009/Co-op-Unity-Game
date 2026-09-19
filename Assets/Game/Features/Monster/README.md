@@ -1,19 +1,9 @@
 # Monster — 몬스터
 
-## 다음 작업자용 빠른 안내
-
-- 쉬운 이름: 일반 몬스터 행동.
-- 수정 시작점: [PrototypeCapsuleMonster.cs](PrototypeCapsuleMonster.cs).
-- 현재 담당: 인식·추적·공격 예고·환경 대응.
-- 이 폴더만으로 처리하지 않는 범위: 현재 보스 기믹은 Puzzles/PrototypeStageObjective.cs.
-- 함께 확인: MapGeneration, Puzzles, Online.
-- 지시 예시: “몬스터가 추적하지 않음 → Features/Monster → PrototypeCapsuleMonster.cs → MapGeneration, Puzzles, Online와 영향 확인”.
-- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
-
 ## 담당 범위
 
 - 몬스터 인식·추적·공격·상태 전환과 등장 규칙을 담당합니다.
-- 기획상 보스 행동도 관련 범위지만 현재 협동 보스 기믹 코드는 Puzzles/PrototypeStageObjective.cs에 있다. 지역 배치는 MapGeneration과 해당 Levels를 함께 확인한다.
+- 보스의 행동과 전투 단계도 이곳에서 관리합니다. 보스 방과 배경 배치는 Levels의 해당 챕터가 담당합니다.
 
 ## 함께 확인할 폴더
 
@@ -43,5 +33,9 @@
 ## 로컬 프로토타입 구현 (2026-09-19)
 
 `PrototypeCapsuleMonster.cs`: 시야·추적·예고 공격·유인·환경 저지. 직접 공격과 몬스터 처치 점수를 제공하지 않는다.
+
+## 2026-09-20 구현 상태
+
+PrototypeCapsuleMonster.cs는 순찰·추적·유인·공격 예고·공격 대기·환경 장치로 저지 상태를 분리한다. 기존 State, AttackWarningSequence, AttackWarning 공개 API를 유지한다. 수치·최종 에셋·서버 연동은 확정·검증되지 않았다.
 
 실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

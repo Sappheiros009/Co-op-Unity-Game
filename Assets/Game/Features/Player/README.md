@@ -52,3 +52,35 @@
 `PrototypeCapsulePlayer`는 독립 참가자 ID와 로컬/서버/표시 전용 제어를 구분한다. 서버 제어는 호스트 키보드·카메라·설정창에 의존하지 않고 `StepServerInput`으로 해당 참가자만 실행한다. 물리·입력 준비 검사는 [TEST-0005](../../../../Docs/Testing/TEST-0005-ServerPlayerControl.md), 후속 실제 2/3/4인 입력 수신·서버 이동·표시 전용 복제는 [TEST-0007](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md)에 구분한다. 시점 즉시 반응과 위치 보간은 구현했지만 위치 예측/보정·지연/손실 검증은 남아 있다.
 
 실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).
+
+
+## 2026-09-20 Player 이동 코드 검토
+
+검토 대상은 `PrototypeCapsulePlayer.cs`, `PrototypeWaitingRoomWalker.cs`, `PrototypePlayerInput.cs`, `PrototypeMovementRules.cs`, `PrototypeClimbSurface.cs`, `PrototypeSlimeBody.cs`와 기존 입력·서버 제어 계약이다.
+
+### 확인된 구현
+
+- CharacterController·Input System·`PrototypeTuning`·`PrototypeMotorInput` 재사용.
+- 이동·앞방향 달리기·점프·앉기·벽 타기·맨틀·1인칭 카메라 구현.
+- Local·Server·Replica 제어 분리.
+- 낮은 천장 기립 전 캡슐 점유 검사.
+- 부모 오브젝트 등반 표면 인식.
+- 포커스 상실·일시정지 시 로컬 입력 차단.
+- Player 폴더 밖 소스·패키지·프로젝트 설정 수정 없음.
+
+### 미해결 검토 이슈
+
+- **P1**: `PrototypeCapsulePlayer.StepMotor`에 `deltaTime > 0.1f` 상한이 없다. 프레임 급증 시 과도한 이동·중력이 발생할 수 있다.
+- **P1**: `PrototypeWaitingRoomWalker.EnableReplicaView`가 Replica 카메라를 활성화한다. 현재 Online 계약과 “Replica 로컬 카메라 금지” 요구가 충돌하므로 07 담당의 소유권 결정이 필요하다.
+- **P2**: `CanStand`의 반복 `Physics.OverlapCapsule`이 배열을 할당한다. `Physics.CheckCapsule` 또는 NonAlloc 방식 검토가 필요하다.
+- **P2**: `StepMotor`가 `Configure` 이후 호출된다는 전제에 의존해 `ViewCamera`, `Interaction`, `_game` 초기화 누락 시 NullReference 위험이 있다.
+- **P2**: 대기방 달리기가 `PrototypeMovementRules.CanSprint`와 별도 조건을 사용하므로 전용 규칙 여부를 명시해야 한다.
+
+### 검증 경계
+
+소스 검토와 `git diff --check`만 확인했다. Unity 컴파일·Windows 빌드·PlayMode·실제 2~4인 네트워크·지연/손실 검증은 실행하지 않았다. 이 기록은 빌드 성공이나 실제 게임 동작 성공을 의미하지 않는다.
+
+### 담당 연계
+
+- **07 Online**: Replica 카메라 소유권 계약 확정.
+- **09 Tests/Operations**: deltaTime 경계, 기립 충돌, 벽 타기, 포커스 상실 테스트 추가.

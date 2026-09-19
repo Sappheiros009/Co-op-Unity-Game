@@ -9,21 +9,35 @@ namespace SlimeCoop.Prototype
         private Transform _root;
         private Material _floor, _wall, _accent, _danger, _safe;
         private readonly System.Collections.Generic.List<PrototypeInteractable> _pickups = new System.Collections.Generic.List<PrototypeInteractable>();
+        private readonly Collider[] _monsterSpawnOverlaps = new Collider[32];
         private PrototypeInteractable _keySource;
         private float _recoveryAt;
         public System.Collections.Generic.IReadOnlyList<PrototypeInteractable> Pickups => _pickups;
+        public System.Collections.Generic.IReadOnlyList<Vector3> MonsterSpawnCandidates => Layout == null
+            ? System.Array.Empty<Vector3>() : Layout.MonsterSpawnCandidates;
         public PrototypeChapterDefinition Definition { get; private set; }
         public PrototypeCapsulePlayer Player { get; private set; }
         public PrototypeExitScoring Exit { get; private set; }
         public Vector3 PlayerSpawn => new Vector3(0, 0.15f, -5);
         public PrototypeRoomLayout Layout { get; private set; }
         public PrototypeMovingRaft Raft { get; private set; }
+        public bool HasMonsterSpawn { get; private set; }
+        public Vector3 MonsterSpawn { get; private set; }
 
         public void Build(PrototypeGame game)
         {
             _game = game; Definition = game.Chapter;
-            Layout = new PrototypeRoomLayout(PrototypeSession.Seed + game.ChapterNumber * 101 + game.StageNumber * 13);
-            if (!Layout.Validate()) throw new System.InvalidOperationException("진행 불가능한 연결 통로");
+            HasMonsterSpawn = false; MonsterSpawn = Vector3.zero;
+            var layoutSeed = PrototypeSession.Seed + game.ChapterNumber * 101 + game.StageNumber * 13;
+            Layout = null;
+            for (var attempt = 0; attempt < 8; attempt++)
+            {
+                var candidate = new PrototypeRoomLayout(layoutSeed + attempt * 7919);
+                if (!candidate.Validate()) continue;
+                Layout = candidate; break;
+            }
+            if (Layout == null)
+                throw new System.InvalidOperationException($"진행 불가능한 연결 통로: seed={layoutSeed}, chapter={game.ChapterNumber}, stage={game.StageNumber}");
             var old = transform.Find(Definition.MapRootName);
             if (old != null)
             {
@@ -105,6 +119,13 @@ namespace SlimeCoop.Prototype
             Hazard("FatalRoute", new Vector3(8.6f, 0.12f, 50), new Vector3(1.8f, 0.25f, 5), 120f);
             Label("위험! 사망 경로", new Vector3(8, 2.4f, 51), 0.13f);
             BuildRegion(objective);
+            if (game.StageNumber > 1)
+            {
+                Physics.SyncTransforms();
+                if (!TrySelectMonsterSpawn(out var spawn))
+                    throw new System.InvalidOperationException($"유효한 몬스터 등장 위치 없음: seed={Layout.Seed}, chapter={game.ChapterNumber}, stage={game.StageNumber}");
+                MonsterSpawn = spawn; HasMonsterSpawn = true;
+            }
             var playerObject = new GameObject("Player_Capsule"); playerObject.transform.SetParent(_root);
             Player = playerObject.AddComponent<PrototypeCapsulePlayer>();
             var control = game.IsReplica ? PrototypePlayerControl.Replica : game.IsServerControlled ? PrototypePlayerControl.Server : PrototypePlayerControl.Local;
@@ -133,7 +154,7 @@ namespace SlimeCoop.Prototype
             {
                 var monsterObject = new GameObject("Monster_Sentry"); monsterObject.transform.SetParent(_root);
                 var monster = monsterObject.AddComponent<PrototypeCapsuleMonster>();
-                monster.Configure(game, new Vector3(0, 0.15f, 28), Definition.HazardColor);
+                monster.Configure(game, MonsterSpawn, Definition.HazardColor);
                 game.RegisterMonster(monster);
             }
             if (game.StageNumber == 6)
@@ -148,6 +169,35 @@ namespace SlimeCoop.Prototype
             RenderSettings.fog = true; RenderSettings.fogColor = Definition.FogColor;
             RenderSettings.fogMode = FogMode.Linear; RenderSettings.fogStartDistance = 45; RenderSettings.fogEndDistance = 110;
         }
+        private bool TrySelectMonsterSpawn(out Vector3 selected)
+        {
+            for (var i = 0; i < Layout.MonsterSpawnCandidates.Count; i++)
+            {
+                var candidate = Layout.MonsterSpawnCandidates[i];
+                if (!Layout.IsInsidePlayableBounds(candidate, .45f) || !Layout.CanReach(candidate, new Vector3(0, .15f, 53))) continue;
+                if (Vector3.Distance(candidate, PlayerSpawn) < 8f || Vector3.Distance(candidate, new Vector3(0, .15f, 53)) < 5f) continue;
+                if (!IsMonsterSpawnClear(candidate)) continue;
+                selected = candidate; return true;
+            }
+            selected = Vector3.zero; return false;
+        }
+
+        private bool IsMonsterSpawnClear(Vector3 candidate)
+        {
+            var bottom = candidate + Vector3.up * .5f;
+            var top = candidate + Vector3.up * 1.4f;
+            if (Physics.CheckCapsule(bottom, top, .45f, ~0, QueryTriggerInteraction.Ignore)) return false;
+
+            var count = Physics.OverlapCapsuleNonAlloc(bottom, top, .45f, _monsterSpawnOverlaps, ~0, QueryTriggerInteraction.Collide);
+            if (count == _monsterSpawnOverlaps.Length) return false;
+            for (var i = 0; i < count; i++)
+            {
+                var collider = _monsterSpawnOverlaps[i];
+                if (collider != null && collider.GetComponentInParent<PrototypeHazard>() != null) return false;
+            }
+            return true;
+        }
+
         private void BuildRegion(PrototypeStageObjective objective)
         {
             switch (_game.ChapterNumber)

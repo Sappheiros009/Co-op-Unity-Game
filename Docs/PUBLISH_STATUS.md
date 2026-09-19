@@ -4,12 +4,14 @@
 
 ## 현재 게시 — 개발 중단 시점
 
-사용자 요청으로 추가 개발 목표를 중단하고 현재 결과만 게시한다. [인계서](PROTOTYPE_HANDOFF.md)에 구현 범위·실행 방법·검증·미완료 항목을 정리했다. 원격 상태 확인 전에는 게시 완료로 표시하지 않는다.
+사용자 요청으로 추가 개발 목표를 중단하고 현재 결과만 게시한다. [인계서](PROTOTYPE_HANDOFF.md)에 구현 범위·실행 방법·검증·미완료 항목을 정리했다. GitHub의 소스 커밋과 인계서 원문을 원격에서 다시 확인했다. Notion은 권한 연결 대기이므로 두 서비스 모두 게시 완료라고 표시하지 않는다.
 
-- GitHub: `codex/00-prototype-baseline` 브랜치에 현재 소스·문서 게시 준비 중. 준비 시점 원격 브랜치는 `1de6ca3`, `main`은 `f19a012`이며 충돌 없이 같은 이력을 공유한다. `main` 자동 병합은 하지 않는다.
+- GitHub: [소스 게시 커밋 eb3779a](https://github.com/Sappheiros009/Co-op-Unity-Game/commit/eb3779aa2f6be7e0f165af961de7e92b6cabdb79)를 `codex/00-prototype-baseline`에 push했다. 직전 브랜치 기준 517개 파일 변경이며 원격 PR의 head SHA와 인계서 내용을 재확인했다. [PR #1](https://github.com/Sappheiros009/Co-op-Unity-Game/pull/1)을 생성해 이 작업에 연결했다. PR에는 앞선 기준선 커밋도 포함된다. `main`은 `f19a012` 그대로이며 자동 병합하지 않았다.
 - Notion: 원본 기획 페이지 접근 권한 대기. 연결된 워크스페이스와 원본 워크스페이스가 달라 원본 fetch가 404로 실패했다. 다른 워크스페이스에 대체 페이지를 만들거나 게시 완료로 표시하지 않는다. 사용자 재연결 후 원본 본문·하위 페이지를 보존하여 반영한다.
 - 대상: Unity 소스·16개 씬·설정·스크립트·기획·검증 요약. 제외: 실행 파일·Unity 캐시·원시 로그·개인 저장/IDE 설정·비밀 키·PEAK 추출 데이터. 외부 포함물은 [ThirdParty 고지](../Assets/ThirdParty/NOTICES.md)를 보존한다.
 - 게임 증거: 2026-09-19 PlayMode 156/156, Windows 빌드, 2/3/4인 전멸·재도전, 최신 빌드 4인 완료 복귀·일반 로비 회귀. [TEST-0011](Testing/TEST-0011-NetworkWipeRetry.md)과 원본 XML·보고서·DLL 해시를 대조했다. 전체 게임·Steam/PlayFab·출시 검증이 아니다.
+- 게시 검증: 로컬 Validate 974개 통과·실패 0, 검사기 자체 테스트 22/22 통과. Readiness는 `BLOCKED`이며 상세 결정·원격 게임/운영 검증이 남아 있다. 코드·문서 diff 검사는 통과했고 Unity 생성 씬의 공백은 재작성하지 않았다.
+- 원격 CI: 소스 커밋 `eb3779a`의 [PR 검사 Run 35451141464](https://github.com/Sappheiros009/Co-op-Unity-Game/actions/runs/35451141464)는 본 기록 시점에 문서 검사 단계 성공·검사기 자체 테스트 진행 중이었다. 이 워크플로는 문서 전용이며 Unity 빌드가 아니다. 최신 완료 상태는 해당 실행 링크와 PR에서 확인한다.
 
 ## 과거 게시 이력 — 2026-09-18~19
 

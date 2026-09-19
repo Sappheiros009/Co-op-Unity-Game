@@ -1,15 +1,5 @@
 # MapGeneration — 맵 생성
 
-## 다음 작업자용 빠른 안내
-
-- 쉬운 이름: 플레이 공간 조립.
-- 수정 시작점: [PrototypeMapBuilder.cs](PrototypeMapBuilder.cs).
-- 현재 담당: 방·통로·지역 기믹 배치, PrototypeRoomLayout.cs의 배치 자료.
-- 이 폴더만으로 처리하지 않는 범위: 장기 지역 시나리오·최종 아트 승인.
-- 함께 확인: Levels, Puzzles, Monster.
-- 지시 예시: “특정 시드에서 출구 접근 불가 → Features/MapGeneration → PrototypeMapBuilder.cs → Levels, Puzzles, Monster와 영향 확인”.
-- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
-
 ## 담당 범위
 
 - 고정된 방과 랜덤 통로의 연결, 배치 후보 선택과 생성 규칙을 담당합니다.
@@ -49,5 +39,9 @@
 `PrototypeHazard.cs`는 서버/로컬 판정 월드의 참가자·몬스터 발 위치가 기존 위험 Collider 안에 있는지 고정 틱에서 대조한다. 캐릭터·위험 지대에 Rigidbody를 추가하지 않으며 복제 월드는 판정하지 않는다. 실제 피해·구역 이탈·위로 점프·출구 보호와 네트워크 전멸 재도전 회귀는 [TEST-0011](../../../../Docs/Testing/TEST-0011-NetworkWipeRetry.md)에서 관리한다.
 
 `PrototypeGame.ConfigureServerPlayers`가 지정된 경우 같은 맵에 2~4개의 독립 서버 제어 플레이어를 만들고 시험 동료 AI는 생성하지 않습니다. 명단·역할·출구 인원 준비 검사는 [TEST-0005](../../../../Docs/Testing/TEST-0005-ServerPlayerControl.md), 실제 서버 챕터 시작·입력 이동·표시 전용 복제는 [TEST-0007](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md)에 있습니다. 네트워크 부유물 안내는 시험 AI 배치가 아니라 전원 직접 탑승으로 표시합니다. 발판 위험 색·사용 결과 등 일부 표현과 실제 전체 코스 검증은 남아 있습니다.
+
+## 2026-09-20 구현 상태
+
+PrototypeRoomLayout은 시드 기반 몬스터 등장 후보와 시작점→출구·후보→출구 경로를 검사한다. PrototypeMapBuilder는 후보를 고정 순서로 선택하고 정적 충돌·위험 지대·시작/출구 근접 후보를 제외한다. 최종 절차적 생성과 실제 멀티플레이어 동기화는 미검증이다.
 
 실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

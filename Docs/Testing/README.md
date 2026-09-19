@@ -2,6 +2,20 @@
 
 [검증 양식](TEST_REPORT_TEMPLATE.md)에 환경·버전·실행 방법·기대 결과·실제 결과·증거·미검증 범위를 기록한다. 구현 전 기대 결과를 실제 통과로 표시하지 않는다.
 
+## 공통 판정과 증거 규칙
+
+- 표준 판정: `PASS`, `FAIL`, `BLOCKED`, `NOT_RUN`, `NOT_APPLICABLE`.
+- `PASS`는 해당 조건·환경·커밋에서 실제 증거가 있는 경우만 사용한다.
+- 문서·코드 존재·빌드 성공은 게임 동작·온라인·배포 성공으로 간주하지 않는다.
+- 로그·JUnit·빌드 해시·실행 식별자는 결과와 같은 실행에서 생성된 자료만 연결한다.
+- 외부 서비스·라이선스·실제 클라이언트가 없으면 `BLOCKED` 또는 `NOT_RUN`으로 남긴다.
+
+테스트·버그·운영 기록의 공통 범위와 연결 규칙은 [TEST-0012](TEST-0012-TestBugOperationsBaseline.md)에서 관리한다. 문서 구조 검사는 다음 명령으로 별도 실행한다.
+
+```powershell
+pwsh -NoProfile -File ./Docs/Testing/Test-OperationalRecords.ps1
+```
+
 | 영역 | 핵심 검사 |
 |---|---|
 | Player·Cooperation | 벽 타기·끌어올리기·구조, 연속 동작, 장시간 플레이 |

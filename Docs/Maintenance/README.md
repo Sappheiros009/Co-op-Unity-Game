@@ -24,5 +24,6 @@ P0 게임 실행·핵심 기능 필수 / P1 출시 필수 / P2 출시 품질 향
 | [TASK-0004](TASK-0004-SourceBaselineIntegration.md) | GitHub 기획 기준과 로컬 Unity 프로토타입 소스 통합 준비 | 검증 대기 | 프로젝트 전체·Unity 프로젝트·게시 상태 |
 | [TASK-0005](TASK-0005-FullPlanningPrototype.md) | 통합 기획 플레이어블 프로토타입 재제작 | 사용자 요청 개발 중단·현시점 인계 | Core·Features·Editor·Tests |
 | [TASK-0006](TASK-0006-ReferenceSources.md) | 사용자 제공 개발 사이트의 소스 등록과 활용 기준 연결 | 완료(자료·문서) | Docs·AGENTS·ThirdParty 안내 |
+| [TASK-0017](TASK-0017-TestBugOperationsBaseline.md) | 테스트·버그·운영 기준과 기록 연결 | 문서·검사 도구 반영·사용자 검증 대기 | Tests·Testing·Bugs·Maintenance·Operations·CI |
 
 [폴더 지도](../FOLDER_MAP.md) · [작업 원칙](../WORKING_PRINCIPLES.md) · [버그 관리](../Bugs/README.md) · [운영 관리](../Operations/README.md)

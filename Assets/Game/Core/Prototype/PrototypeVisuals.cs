@@ -9,9 +9,12 @@ namespace SlimeCoop.Prototype
     public static class PrototypeVisuals
     {
         private static Shader _litShader;
+        private static readonly System.Collections.Generic.Dictionary<string, Material> RuntimeMaterials = new System.Collections.Generic.Dictionary<string, Material>();
 
         public static Material CreateMaterial(string materialName, Color color, bool emission = false)
         {
+            var cacheKey = ColorUtility.ToHtmlStringRGBA(color) + (emission ? "E" : "N");
+            if (Application.isPlaying && RuntimeMaterials.TryGetValue(cacheKey, out var cached) && cached != null) return cached;
             if (_litShader == null)
             {
                 _litShader = Shader.Find("Universal Render Pipeline/Lit")
@@ -41,6 +44,7 @@ namespace SlimeCoop.Prototype
                 material.SetColor("_EmissionColor", color * 1.8f);
             }
 
+            if (Application.isPlaying) RuntimeMaterials[cacheKey] = material;
             return material;
         }
 

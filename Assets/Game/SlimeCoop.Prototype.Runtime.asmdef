@@ -2,7 +2,12 @@
   "name": "SlimeCoop.Prototype.Runtime",
   "rootNamespace": "SlimeCoop.Prototype",
   "references": [
-    "GUID:75469ad4d38634e559750d17036d5f7c"
+    "GUID:75469ad4d38634e559750d17036d5f7c",
+    "Unity.TextMeshPro",
+    "Unity.ugui",
+    "Unity.Netcode.Runtime",
+    "Unity.Collections",
+    "Unity.RenderPipelines.Universal.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
@@ -11,6 +16,6 @@
   "precompiledReferences": [],
   "autoReferenced": true,
   "defineConstraints": [],
-  "versionDefines": [],
+  "versionDefines": [{ "name": "com.unity.modules.video", "expression": "1.0.0", "define": "PROTOTYPE_VIDEO" }],
   "noEngineReferences": false
 }

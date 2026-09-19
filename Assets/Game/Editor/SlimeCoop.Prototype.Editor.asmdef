@@ -2,7 +2,8 @@
   "name": "SlimeCoop.Prototype.Editor",
   "rootNamespace": "SlimeCoop.Prototype.Editor",
   "references": [
-    "GUID:c805d742fce44037a5ba9934688813d9"
+    "GUID:c805d742fce44037a5ba9934688813d9",
+    "Unity.TextMeshPro"
   ],
   "includePlatforms": [
     "Editor"

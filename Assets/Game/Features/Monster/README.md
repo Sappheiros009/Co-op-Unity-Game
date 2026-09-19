@@ -29,3 +29,9 @@
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeCapsuleMonster.cs`: 시야·추적·예고 공격·유인·환경 저지. 직접 공격과 몬스터 처치 점수를 제공하지 않는다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

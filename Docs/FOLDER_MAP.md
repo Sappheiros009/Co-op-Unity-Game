@@ -12,6 +12,9 @@
 ├─ README.md
 ├─ AGENTS.md
 ├─ ProjectPipeline.ps1
+├─ PrototypePipeline.ps1
+├─ TestLocalLobby.ps1
+├─ LocalNetwork.ps1
 ├─ .gitignore
 ├─ .github/
 │  └─ workflows/
@@ -21,7 +24,10 @@
 │  ├─ NAMING_DECISIONS.md
 │  ├─ PROJECT_PROMPT.md
 │  ├─ WORKING_PRINCIPLES.md
+│  ├─ REFERENCE_SOURCES.md
 │  ├─ PROJECT_STATE.md
+│  ├─ PROTOTYPE_GUIDE.md
+│  ├─ PROTOTYPE_COVERAGE.md
 │  ├─ DESIGN_TEMPLATE.md
 │  ├─ DESIGN-0001-StageExit.md
 │  ├─ DESIGN-0002-CharacterAssetProduction.md
@@ -143,6 +149,8 @@
 | [Assets/Game/Editor](../Assets/Game/Editor/README.md) | 제작 보조 도구 |
 | [Assets/Game/Tests](../Assets/Game/Tests/README.md) | 구현 검증 |
 | [Assets/ThirdParty](../Assets/ThirdParty/README.md) | 외부 에셋과 도구 |
+
+에셋·도구 후보를 찾는 출처와 사용 기준은 [개발 참고자료](REFERENCE_SOURCES.md), 실제 도입 파일과 검증 결과는 ThirdParty 및 담당 기능 README에서 관리합니다. 사이트 등록과 파일 도입은 구분합니다.
 
 ## 증상으로 담당 찾기
 

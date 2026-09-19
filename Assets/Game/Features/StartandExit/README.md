@@ -32,7 +32,7 @@
 
 ## 문제가 생겼을 때
 
-[시스템 구조](../../../../Docs/ARCHITECTURE.md)의 상태 전이·단일 정산 계약과 [파이프라인](../../../../Docs/PIPELINE.md)의 게임 회귀 목록을 함께 봅니다. 현재 자동 검사는 기획 문서 대상이며 이 기능의 게임 테스트는 미구현입니다.
+[시스템 구조](../../../../Docs/ARCHITECTURE.md)의 상태 전이·단일 정산 계약과 [파이프라인](../../../../Docs/PIPELINE.md)의 게임 회귀 목록을 함께 봅니다. 자동 검사는 문서 계약과 로컬 게임 회귀로 구분합니다. 최신 전멸·재도전 검증 범위는 [TEST-0011](../../../../Docs/Testing/TEST-0011-NetworkWipeRetry.md)을 확인합니다.
 
 현재 챕터·스테이지, 참가자 상태, 종료 원인, 회차 점수, 초기화 전후의 해금 기록을 확인합니다. 미정인 정산·전환·부활 예외는 기획 확인 후 수정합니다.
 
@@ -55,3 +55,11 @@
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeExitScoring.cs`: 개방·명단·거리·5초 경계·중복 검사와 시험 팀 점수. 구간/챕터 전환과 전멸 오케스트레이션은 Core/Prototype/PrototypeGame이 담당한다.
+
+별도 로컬 서버 전멸 후 2D 결과·3D 대기방·새 런의 연결은 Online/PrototypeNetworkWorld·PrototypeNetworkClientWorld가 담당한다. 클라이언트의 임시 구간 초기화 수정과 영구 저장 대조는 [TEST-0011](../../../../Docs/Testing/TEST-0011-NetworkWipeRetry.md)에 연결한다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

@@ -11,9 +11,36 @@ namespace SlimeCoop.Prototype.Editor
     {
         private const string LobbyScenePath = "Assets/Game/Levels/Lobby/PrototypeLobby.unity";
         private const string WaitingRoomScenePath = "Assets/Game/Levels/Lobby/PrototypeWaitingRoom.unity";
+        private static double _textImportDeadline;
 
+        // Unity 6000.6 imports resource packages asynchronously. Invoke WITHOUT -quit.
+        public static void ImportTextResources()
+        {
+            if (Resources.Load<TMPro.TMP_Settings>("TMP Settings") != null) { EditorApplication.Exit(0); return; }
+            _textImportDeadline = EditorApplication.timeSinceStartup + 120;
+            EditorApplication.update += WaitForTextResources;
+            TMPro.TMP_PackageResourceImporter.ImportResources(true, false, false);
+        }
+        private static void WaitForTextResources()
+        {
+            if (Resources.Load<TMPro.TMP_Settings>("TMP Settings") != null)
+            {
+                EditorApplication.update -= WaitForTextResources;
+                AssetDatabase.SaveAssets(); Debug.Log("[PrototypeSceneBuilder] TMP resources verified"); EditorApplication.Exit(0);
+            }
+            else if (EditorApplication.timeSinceStartup > _textImportDeadline)
+            {
+                EditorApplication.update -= WaitForTextResources;
+                Debug.LogError("TMP Essential Resources import timed out"); EditorApplication.Exit(2);
+            }
+        }
+
+        [MenuItem("Slime Prototype/Rebuild Prototype Scenes")]
         public static void BuildScenes()
         {
+            if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            if (Resources.Load<TMPro.TMP_Settings>("TMP Settings") == null)
+                throw new System.InvalidOperationException("Run ImportTextResources without -quit before building scenes.");
             CreateDirectoryForAsset(LobbyScenePath);
             CreateDirectoryForAsset(WaitingRoomScenePath);
             CreateDirectoryForAsset("Assets/Game/Levels/Episode01/StoryInterludes/PrototypeStoryInterlude_Chapter01.unity");
@@ -40,7 +67,8 @@ namespace SlimeCoop.Prototype.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             Debug.Log("[PrototypeSceneBuilder] Built Lobby -> WaitingRoom -> Chapter01..07 with story interludes.");
-            EditorApplication.Exit(0);
+            EditorSceneManager.OpenScene(LobbyScenePath);
+            if (Application.isBatchMode) EditorApplication.Exit(0);
         }
 
         public static string[] GetPrototypeScenePaths()
@@ -71,6 +99,14 @@ namespace SlimeCoop.Prototype.Editor
             EditorSceneManager.SaveScene(scene, LobbyScenePath);
         }
 
+        [MenuItem("Slime Prototype/Rebuild Walkable Waiting Room")]
+        public static void RebuildWalkableWaitingRoom()
+        {
+            if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+            BuildWaitingRoomScene(); AssetDatabase.SaveAssets();
+            Debug.Log("[PrototypeSceneBuilder] Rebuilt walkable 3D waiting room only; lobby remains 2D.");
+            if (Application.isBatchMode) EditorApplication.Exit(0);
+        }
         private static void BuildWaitingRoomScene()
         {
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);

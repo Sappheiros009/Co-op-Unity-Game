@@ -20,11 +20,22 @@
 
 ## 구현 파일 안내
 
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+아래는 로컬 시험 코드이며 실제 서버 소유권·요청 인증과 구분합니다.
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| [PrototypeInteraction.cs](PrototypeInteraction.cs) | 키 입력 스냅샷, 대상·거리·차폐·소지품 검사, 구조/운반/사용 | [상호작용 회귀](../../Tests/PrototypeInteractionTests.cs) |
+| [PrototypeInteraction.cs](PrototypeInteraction.cs)의 서버 제어 경계 | 서버 참가자는 로컬 키보드/설정창과 분리. 실제 플레이어 객체도 끌어올리기 가능 | [서버 참가자 검사](../../Tests/PrototypeServerPlayerTests.cs), [결과](../../../../Docs/Testing/TEST-0005-ServerPlayerControl.md) |
+| [PrototypeInteractable.cs](PrototypeInteractable.cs) | 획득·장치 사용·필수 아이템 복구 위치 | [구간 회귀](../../Tests/PrototypeCourseTests.cs) |
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeInteraction.cs`: 대상 안내·동료 우선 구조·아이템 사용. `PrototypeInteractable.cs`: 획득·장치·기록 상호작용.
+
+서버 참가자의 근접 안내에는 실제 키 대신 `{key:Interact}`·`{key:Drop}` 행동 ID를 넣는다. 클라이언트는 [PrototypeNetworkClientWorld](../Online/PrototypeNetworkClientWorld.cs)에서 자기 키 설정으로 표시한다. 로컬 실행의 안내는 기존 현재 키 표시를 유지한다. [연결·검증 기록](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md).
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

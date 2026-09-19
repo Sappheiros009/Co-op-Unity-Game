@@ -13,6 +13,8 @@ namespace SlimeCoop.Prototype.Tests
         [SetUp]
         public void SetUp()
         {
+            PrototypeSession.PartySize = 4;
+            PrototypeSession.BeginChapter(1);
             _exitObject = new GameObject("Test Exit");
             _participantObjects = new GameObject[4];
             for (var index = 0; index < _participantObjects.Length; index++)
@@ -86,7 +88,7 @@ namespace SlimeCoop.Prototype.Tests
             Assert.IsTrue(exit.IsSettled);
             Assert.AreEqual(4, exit.ArrivedCount);
             Assert.Greater(exit.TeamScore, 0);
-            StringAssert.Contains("early", exit.SettlementReason);
+            StringAssert.Contains("전원 도착", exit.SettlementReason);
         }
 
         [UnityTest]
@@ -99,7 +101,7 @@ namespace SlimeCoop.Prototype.Tests
 
             Assert.IsTrue(exit.IsSettled);
             Assert.AreEqual(1, exit.ArrivedCount);
-            StringAssert.Contains("5-second", exit.SettlementReason);
+            StringAssert.Contains("5초", exit.SettlementReason);
         }
 
         private PrototypeExitScoring ConfigureExit()

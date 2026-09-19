@@ -2,7 +2,11 @@
   "name": "SlimeCoop.Prototype.Tests",
   "rootNamespace": "SlimeCoop.Prototype.Tests",
   "references": [
-    "GUID:c805d742fce44037a5ba9934688813d9"
+    "GUID:c805d742fce44037a5ba9934688813d9",
+    "GUID:75469ad4d38634e559750d17036d5f7c",
+    "Unity.TextMeshPro",
+    "Unity.ugui",
+    "Unity.Netcode.Runtime"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

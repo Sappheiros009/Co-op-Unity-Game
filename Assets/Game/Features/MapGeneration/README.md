@@ -1,5 +1,15 @@
 # MapGeneration — 맵 생성
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 플레이 공간 조립.
+- 수정 시작점: [PrototypeMapBuilder.cs](PrototypeMapBuilder.cs).
+- 현재 담당: 방·통로·지역 기믹 배치, PrototypeRoomLayout.cs의 배치 자료.
+- 이 폴더만으로 처리하지 않는 범위: 장기 지역 시나리오·최종 아트 승인.
+- 함께 확인: Levels, Puzzles, Monster.
+- 지시 예시: “특정 시드에서 출구 접근 불가 → Features/MapGeneration → PrototypeMapBuilder.cs → Levels, Puzzles, Monster와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - 고정된 방과 랜덤 통로의 연결, 배치 후보 선택과 생성 규칙을 담당합니다.

@@ -1,5 +1,15 @@
 # UI — 화면과 조작 안내
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 플레이어가 보는 화면.
+- 수정 시작점: [PrototypeLobbyController.cs](PrototypeLobbyController.cs).
+- 현재 담당: 로비·대기방·HUD·설정 표시; PrototypeSettings.cs의 로컬 설정.
+- 이 폴더만으로 처리하지 않는 범위: 서버 클리어·점수·제재 판정.
+- 함께 확인: Player, Online, Story, Audio.
+- 지시 예시: “대기방 조작 안내 수정 → Features/UI → PrototypeLobbyController.cs → Player, Online, Story, Audio와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - 로비·준비·설정 화면, 상태창, 소지품, 스태미나, 상호작용 안내를 담당합니다.

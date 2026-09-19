@@ -1,5 +1,15 @@
 # StartandExit — 시작·종료와 회차 진행
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 출구 집계와 팀 점수.
+- 수정 시작점: [PrototypeExitScoring.cs](PrototypeExitScoring.cs).
+- 현재 담당: 출구 조건·도착 집계·정산.
+- 이 폴더만으로 처리하지 않는 범위: 전환 조정은 Core/Prototype/PrototypeGame.cs, 런 상태는 Online/PrototypeSession.cs.
+- 함께 확인: Core, Online, Save.
+- 지시 예시: “한 명 탈출 후 집계 오류 → Features/StartandExit → PrototypeExitScoring.cs → Core, Online, Save와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 게임 시작·챕터 도전·스테이지 전환·출구·전멸·재시작·팀 정산·다음 구간 부활을 담당한다. 영구 해금·업적·설정은 Save가 관리한다.

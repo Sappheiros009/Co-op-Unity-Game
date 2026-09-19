@@ -1,5 +1,15 @@
 # Core — 초기화와 공통 기반
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 공통 기반과 진행 연결.
+- 수정 시작점: [Prototype/PrototypeGame.cs](Prototype/PrototypeGame.cs).
+- 현재 담당: 참가자 등록·맵 구성·정산 후 전환 연결.
+- 이 폴더만으로 처리하지 않는 범위: 새 기능을 무조건 모으는 장소 아님.
+- 함께 확인: StartandExit, Online, MapGeneration.
+- 지시 예시: “구간 종료 후 전환 누락 → Core → Prototype/PrototypeGame.cs → StartandExit, Online, MapGeneration와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 시작 시 공통 초기화와 여러 기능이 함께 쓰는 기본 자료형·연결 규약을 둡니다. 시작·종료를 포함한 회차의 게임 규칙은 Features/StartandExit가 담당합니다. 기능의 소유자가 명확한 코드는 그 기능 폴더에 둡니다.
 
 ## 관련 위치
@@ -21,6 +31,6 @@
 
 현재 코드는 로컬 프로토타입 공통 기반입니다. 서버 권한·실제 네트워크 상태의 소유권을 대체하지 않습니다.
 
-`ConfigureServerPlayers`는 시험 동료 대신 독립 플레이어를 생성하고, `ServerStageEnded`는 서버 조정자에게 구간 종료를 알리는 연결 지점입니다. 로컬 씬 자동 이동과 분리했지만 실제 네트워크 서버 조정자는 아직 연결 전입니다.
+`ConfigureServerPlayers`는 시험 동료 대신 독립 플레이어를 생성하고, `ServerStageEnded`는 서버 조정자에게 구간 종료를 알리는 연결 지점입니다. 로컬 씬 이동과 분리되며 Online/PrototypeNetworkWorld가 ServerStageEnded를 구독한다. Steam·PlayFab 실연결과는 별개다.
 
 [전체 폴더 지도](../../../Docs/FOLDER_MAP.md) · [작업 기록 양식](../../../Docs/Maintenance/TASK_TEMPLATE.md)

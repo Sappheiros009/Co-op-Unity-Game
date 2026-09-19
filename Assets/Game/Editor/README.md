@@ -1,5 +1,15 @@
 # Editor — 제작 보조 도구
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: Unity 제작 도구.
+- 수정 시작점: [PrototypeSceneBuilder.cs](PrototypeSceneBuilder.cs).
+- 현재 담당: 씬 생성·등록; PrototypeBuild.cs의 빌드 진입점.
+- 이 폴더만으로 처리하지 않는 범위: 실행 중 게임 규칙.
+- 함께 확인: Levels, Core, Tests.
+- 지시 예시: “생성 씬 등록 누락 → Editor → PrototypeSceneBuilder.cs → Levels, Core, Tests와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 Unity 에디터에서 사용하는 제작·검사 도구를 둡니다. `SlimeCoop.Prototype.Editor` 어셈블리는 Unity Editor에서만 컴파일되며 런타임 어셈블리와 분리됩니다. 플레이 중 동작하는 게임 코드는 해당 기능에 둡니다. 도구가 추가되면 실행 위치, 입력, 바뀌는 파일과 결과 확인법을 기록합니다.
 
 ## 관련 위치

@@ -1,5 +1,15 @@
 # Levels — 지역과 스테이지
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 지역과 씬.
+- 수정 시작점: [README.md](README.md).
+- 현재 담당: 로비·챕터·스토리 씬과 지역 자원.
+- 이 폴더만으로 처리하지 않는 범위: 현재 런타임 배치는 MapGeneration/PrototypeMapBuilder.cs; 폴더 존재가 완성 증거는 아님.
+- 함께 확인: MapGeneration, Editor, Story.
+- 지시 예시: “광산 배치 수정 → Levels → README.md → MapGeneration, Editor, Story와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 로비·도입부·챕터의 실제 콘텐츠를 관리합니다. 공통 생성 규칙은 MapGeneration, 게임 기능은 Features에서 관리합니다. 폴더가 준비된 것과 챕터 제작 완료·출시 포함 여부는 구분합니다.
 
 ## 관련 위치

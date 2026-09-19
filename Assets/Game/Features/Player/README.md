@@ -1,5 +1,15 @@
 # Player — 플레이어
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 이동과 카메라.
+- 수정 시작점: [PrototypeCapsulePlayer.cs](PrototypeCapsulePlayer.cs).
+- 현재 담당: 입력에 따른 이동·점프·등반·시점.
+- 이 폴더만으로 처리하지 않는 범위: 출구 점수·영구 저장.
+- 함께 확인: Cooperation, Interaction, Online.
+- 지시 예시: “벽 타기 위치 튐 → Features/Player → PrototypeCapsulePlayer.cs → Cooperation, Interaction, Online와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - 이동·달리기·점프·앉기와 벽 타기, 1인칭 카메라를 담당합니다.

@@ -4,6 +4,64 @@
 
 게임 기능 폴더에는 프로토타입 코드와 안내 문서가 함께 있습니다. 루트와 Docs/Testing에는 실행 가능한 기획 검증 스크립트, `.github/workflows`에는 CI 파일을 추가했습니다. 게임 코드·씬·프리팹이 생기면 해당 README에 실제 파일과 확인 방법을 기록합니다.
 
+## 처음 보는 사람의 읽는 순서
+
+1. Plan.md: 어떤 게임인지 확인.
+2. 이 문서: 증상·요청에 맞는 첫 담당 선택.
+3. 담당 README의 '다음 작업자용 빠른 안내': 실제 파일과 책임 경계 확인.
+4. PROJECT_STATE.md: 구현·미정·검사 상태 확인. 작업 완료 여부는 소스·빌드·실행·게시를 각각 구분.
+
+2026-09-20 확인: GitHub main의 코드 기준선은 PR #1 병합 커밋 2c4d6a8이다. 로컬에는 이후 미게시 변경이 있으므로 서로 같은 버전으로 취급하지 않는다. 이번 정리는 문서만 게시하며 로컬 후속 게임 코드를 포함하지 않는다.
+
+## 실제 수정 시작점
+
+아래 경로는 Assets/Game 기준이다. 목표 담당과 현재 물리적 코드 위치가 다른 경우 담당 README의 예외를 먼저 따른다.
+
+| 폴더 | 쉬운 이름 | 첫 파일 |
+|---|---|---|
+| [Features/Player](../Assets/Game/Features/Player/README.md) | 이동과 카메라 | [PrototypeCapsulePlayer.cs](../Assets/Game/Features/Player/PrototypeCapsulePlayer.cs) |
+| [Features/Cooperation](../Assets/Game/Features/Cooperation/README.md) | 물체 운반과 협동 | [PrototypeCarryable.cs](../Assets/Game/Features/Cooperation/PrototypeCarryable.cs) |
+| [Features/Interaction](../Assets/Game/Features/Interaction/README.md) | 대상 선택과 행동 요청 | [PrototypeInteraction.cs](../Assets/Game/Features/Interaction/PrototypeInteraction.cs) |
+| [Features/Items](../Assets/Game/Features/Items/README.md) | 소지품과 소모품 | [PrototypeInventory.cs](../Assets/Game/Features/Items/PrototypeInventory.cs) |
+| [Features/Puzzles](../Assets/Game/Features/Puzzles/README.md) | 장치 성공 조건 | [PrototypeStageObjective.cs](../Assets/Game/Features/Puzzles/PrototypeStageObjective.cs) |
+| [Features/Monster](../Assets/Game/Features/Monster/README.md) | 일반 몬스터 행동 | [PrototypeCapsuleMonster.cs](../Assets/Game/Features/Monster/PrototypeCapsuleMonster.cs) |
+| [Features/MapGeneration](../Assets/Game/Features/MapGeneration/README.md) | 플레이 공간 조립 | [PrototypeMapBuilder.cs](../Assets/Game/Features/MapGeneration/PrototypeMapBuilder.cs) |
+| [Features/StartandExit](../Assets/Game/Features/StartandExit/README.md) | 출구 집계와 팀 점수 | [PrototypeExitScoring.cs](../Assets/Game/Features/StartandExit/PrototypeExitScoring.cs) |
+| [Features/Online](../Assets/Game/Features/Online/README.md) | 연결과 서버 상태 전달 | [PrototypeNetworkWorld.cs](../Assets/Game/Features/Online/PrototypeNetworkWorld.cs) |
+| [Features/Save](../Assets/Game/Features/Save/README.md) | 진행과 결과 보관 | [PrototypeSave.cs](../Assets/Game/Features/Save/PrototypeSave.cs) |
+| [Features/Story](../Assets/Game/Features/Story/README.md) | 기억과 챕터 사이 이야기 | [PrototypeStoryInterludeController.cs](../Assets/Game/Features/Story/PrototypeStoryInterludeController.cs) |
+| [Features/UI](../Assets/Game/Features/UI/README.md) | 플레이어가 보는 화면 | [PrototypeLobbyController.cs](../Assets/Game/Features/UI/PrototypeLobbyController.cs) |
+| [Core](../Assets/Game/Core/README.md) | 공통 기반과 진행 연결 | [Prototype/PrototypeGame.cs](../Assets/Game/Core/Prototype/PrototypeGame.cs) |
+| [Audio](../Assets/Game/Audio/README.md) | 효과음과 소리 | [PrototypeCues.cs](../Assets/Game/Audio/PrototypeCues.cs) |
+| [Editor](../Assets/Game/Editor/README.md) | Unity 제작 도구 | [PrototypeSceneBuilder.cs](../Assets/Game/Editor/PrototypeSceneBuilder.cs) |
+| [Tests](../Assets/Game/Tests/README.md) | 개발자 검사 코드 | [PrototypeSceneFlowTests.cs](../Assets/Game/Tests/PrototypeSceneFlowTests.cs) |
+| [Levels](../Assets/Game/Levels/README.md) | 지역과 씬 | [README.md](../Assets/Game/Levels/README.md) |
+| [Art](../Assets/Game/Art/README.md) | 공통 시각 자원 | [README.md](../Assets/Game/Art/README.md) |
+| [Localization](../Assets/Game/Localization/README.md) | 언어와 폰트 | [README.md](../Assets/Game/Localization/README.md) |
+
+구조 실패는 Cooperation의 기획 책임을 참고하되 실제 입력·거리·시간 처리는 Interaction/PrototypeInteraction.cs부터 본다. UI 오류라도 멀티플레이 HUD는 Online/PrototypeNetworkClientWorld.cs를 함께 본다.
+
+## 확인한 데이터 흐름
+
+- 서버 입력: PrototypeNetworkTransport의 InputReceived → PrototypeNetworkWorld.OnInput → PrototypeNetworkInputBuffer.Submit → FixedUpdate의 Consume → PrototypeCapsulePlayer.StepServerInput. 전달된 입력을 서버가 소비하며 클라이언트 좌표를 최종 판정으로 삼지 않는다.
+- 표시: PrototypeNetworkWorld.Capture → BroadcastWorld → 클라이언트 수신 → PrototypeNetworkReplica.Apply → 플레이어·물체 표시. 실제 멀티 HUD는 PrototypeNetworkClientWorld가 담당한다.
+- 완료·저장: PrototypeExitScoring.Settle → PrototypeGame의 정산 감지 → PrototypeSession.CompleteStage → ServerStageEnded → PrototypeNetworkWorld.OnStageEnded. 마지막 구간 성공 시 PrototypeChapterCompletion.FromSession으로 결과 생성 → 클라이언트 PrototypeNetworkProgress → PrototypeSave.ApplyCompletion. 로컬 저장이며 클라우드 업로드 완료를 의미하지 않는다.
+
+## 발견한 문제와 처리 경계
+
+| 구분 | 근거 위치 | 영향 | 최소 처리 |
+|---|---|---|---|
+| 확인된 낡은 안내 | Cooperation·Items·Puzzles 등의 README '폴더만 있음' | 실제 코드 탐색 실패 | 코드 시작점 명시·낡은 문구 교정 |
+| 확인된 책임 분산 | Interaction.Rescue, Core/PrototypeGame, Online/PrototypeSession | 폴더 이름만으로 잘못된 파일 수정 | 목표 책임과 현재 구현 위치 병기; 코드 이동 없음 |
+| 확인된 연결 설명 오류 | Core README '서버 조정자 연결 전' | 서버 흐름 오해 | NetworkWorld의 이벤트 구독 명시 |
+| 확인된 원격 차이 | main 기준선과 로컬 후속 변경 | 미게시 기능을 배포 완료로 오인 | 이번 문서 게시와 게임 코드 게시 분리 |
+| 잠재적 이동 위험 | 씬·프리팹·.meta·asmdef·Resources·스크립트 경로 | 참조 손실·동작 변경 | 이동·신설·개명 제안은 승인 후 수행 |
+| 잠재적 생성물 덮어쓰기 | Editor/PrototypeSceneBuilder.cs와 Levels | 씬 직접 수정이 재생성 시 소실 가능 | 수동 수정 전 생성 코드·씬 연결 확인; 재생성 미실행 |
+
+소스는 Assets/Game, 외부 도입물은 Assets/ThirdParty, 패키지 정의는 Packages, 프로젝트 설정은 ProjectSettings에서 찾는다. Build는 실행 산출물, Library·Temp·Obj는 캐시, Logs는 실행 기록, UserSettings는 로컬 설정이다. 캐시나 빌드 결과를 게임 소스의 수정 시작점으로 삼지 않는다. 폴더를 추가로 세분화하거나 자료를 이동하지 않았다.
+
+이번 작업은 문서 경로·호출 연결의 중간 점검만 수행한다. 빌드·컴파일·게임 실행·자동 테스트·최종 기능 검증은 수행하지 않는다. 문서 정리는 프로토타입 완성 판정이 아니다.
+
 ## 전체 구조
 
 ```text
@@ -77,7 +135,7 @@
    └─ ThirdParty/
 ```
 
-로컬 작업공간에는 Unity 6000.6.1f1용 `Packages`·`ProjectSettings`, 프로토타입 코드와 16개 씬이 있습니다. 2026-09-18 `Assets/Game/Editor/PrototypeSceneBuilder.cs`로 씬·메타데이터와 Build Settings를 재생성하고 현재 소스의 별도 Windows 빌드 및 헤드리스 초기 기동을 검증했습니다. 다만 GitHub `main`에는 아직 게시되지 않았습니다. `Build`, `Library`, `Logs`, `UserSettings`, `_UnityTemplate`은 로컬 산출물·캐시·제작용 작업공간이므로 소스 폴더 지도와 Git 게시 대상에서 제외합니다.
+로컬 작업공간에는 Unity 6000.6.1f1용 `Packages`·`ProjectSettings`, 프로토타입 코드와 16개 씬이 있습니다. 2026-09-18 `Assets/Game/Editor/PrototypeSceneBuilder.cs`로 씬·메타데이터와 Build Settings를 재생성하고 현재 소스의 별도 Windows 빌드 및 헤드리스 초기 기동을 검증했습니다. 기준선 소스는 PR #1으로 GitHub main에 병합되었으며, 이후 로컬 변경의 게시 여부는 별도 확인한다. `Build`, `Library`, `Logs`, `UserSettings`, `_UnityTemplate`은 로컬 산출물·캐시·제작용 작업공간이므로 소스 폴더 지도와 Git 게시 대상에서 제외합니다.
 
 자동화 위치: [루트 검사기](../ProjectPipeline.ps1), [검사기 자기 테스트](Testing/Test-ProjectPipeline.ps1), [CI 파일](../.github/workflows/project-validation.yml). 실행 방법과 미구현 단계는 [파이프라인](PIPELINE.md), 실제 결과는 [TEST-0001](Testing/TEST-0001-PlanningPipeline.md)을 봅니다. `.github/workflows`는 GitHub의 표준 자동화 경로이며 사용자 지정 게임 폴더명을 바꾸지 않습니다.
 
@@ -134,7 +192,7 @@
 
 챕터 사이 영상씬은 [StoryInterludes](../Assets/Game/Levels/Episode01/StoryInterludes/README.md)에서 관리합니다. 현재는 실제 영상 대신 챕터별 placeholder 씬만 있습니다.
 
-챕터 폴더를 준비한 것은 제작 완료나 출시 범위 확정을 뜻하지 않습니다. 파일이 생길 때 필요한 챕터에 `Stages`·`Rooms`·`Corridors`·`Boss`를 추가합니다.
+챕터 폴더를 준비한 것은 제작 완료나 출시 범위 확정을 뜻하지 않습니다. 새 하위 폴더가 필요하면 기존 위치·제안 위치·이유·참조 영향을 제시하고 사용자 승인 후 추가한다.
 
 ## 공통 자원과 도구
 

@@ -1,5 +1,15 @@
 # Interaction — 상호작용
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 대상 선택과 행동 요청.
+- 수정 시작점: [PrototypeInteraction.cs](PrototypeInteraction.cs).
+- 현재 담당: 조준·근접 대상·구조 유지·아이템 사용 요청.
+- 이 폴더만으로 처리하지 않는 범위: 장치 성공 조건·팀 점수.
+- 함께 확인: Cooperation, Items, Puzzles.
+- 지시 예시: “동료 대신 상자 선택 → Features/Interaction → PrototypeInteraction.cs → Cooperation, Items, Puzzles와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - 조준하거나 가까이 있는 대상 중 어떤 대상을 조작할지 정합니다.

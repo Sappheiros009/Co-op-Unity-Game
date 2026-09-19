@@ -1,5 +1,15 @@
 # Save — 저장과 복구
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 진행과 결과 보관.
+- 수정 시작점: [PrototypeSave.cs](PrototypeSave.cs).
+- 현재 담당: 로컬 진행·해금·팀 결과 저장; PrototypeChapterCompletion.cs의 결과 계약.
+- 이 폴더만으로 처리하지 않는 범위: 출구 점수 계산·Steam 인증.
+- 함께 확인: StartandExit, Online, UI.
+- 지시 예시: “클리어 후 해금이 저장되지 않음 → Features/Save → PrototypeSave.cs → StartandExit, Online, UI와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 PlayFab과 연결해 계정 데이터·런 데이터·경쟁 데이터를 분리해 저장한다. 영구 챕터 해금·업적·이야기 진행·설정은 계정에 보존한다. 전멸 시 런 점수와 임시 진행을 초기화하는 규칙은 StartandExit가 담당한다.

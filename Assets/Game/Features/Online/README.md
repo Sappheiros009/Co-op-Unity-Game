@@ -1,5 +1,15 @@
 # Online — 온라인 연결
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 연결과 서버 상태 전달.
+- 수정 시작점: [PrototypeNetworkWorld.cs](PrototypeNetworkWorld.cs).
+- 현재 담당: 서버 진행·입력 소비·복제; 연결은 PrototypeNetworkTransport.cs.
+- 이 폴더만으로 처리하지 않는 범위: 개별 게임 규칙·실제 Steam/PlayFab 서비스 개통.
+- 함께 확인: Player, Core, Save.
+- 지시 예시: “서버와 클라이언트 위치 불일치 → Features/Online → PrototypeNetworkWorld.cs → Player, Core, Save와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - Steam 인증, 친구 초대·방 목록·접속·종료·재합류를 PlayFab과 연결한다.

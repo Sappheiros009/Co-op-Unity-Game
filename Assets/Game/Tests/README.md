@@ -1,5 +1,15 @@
 # Tests — 구현 검증
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 개발자 검사 코드.
+- 수정 시작점: [PrototypeSceneFlowTests.cs](PrototypeSceneFlowTests.cs).
+- 현재 담당: 게임 규칙·화면 흐름 검사 코드.
+- 이 폴더만으로 처리하지 않는 범위: 실제 검사 결과 보관은 Docs/Testing, 정상 플레이 코드 아님.
+- 함께 확인: Core, Online, Docs/Testing.
+- 지시 예시: “씬 전환 회귀 조건 추가 → Tests → PrototypeSceneFlowTests.cs → Core, Online, Docs/Testing와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 게임의 자동 검증 코드가 위치합니다. 수동 검증 절차와 결과 기록은 Docs/Testing에서 관리합니다. 현재 `PrototypeExitScoringTests`가 확정된 출구 집계 규칙의 핵심 경계를 검증합니다.
 
 ## 관련 위치

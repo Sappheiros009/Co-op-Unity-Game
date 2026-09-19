@@ -1,5 +1,15 @@
 # Story — 이야기
 
+## 다음 작업자용 빠른 안내
+
+- 쉬운 이름: 기억과 챕터 사이 이야기.
+- 수정 시작점: [PrototypeStoryInterludeController.cs](PrototypeStoryInterludeController.cs).
+- 현재 담당: 이야기 화면 전환, PrototypeStoryMemory.cs의 기억.
+- 이 폴더만으로 처리하지 않는 범위: 최종 영상·대사 확정·온라인 전원 동의 판정.
+- 함께 확인: UI, Online, Save, Localization.
+- 지시 예시: “스토리 뒤 대기방 복귀 실패 → Features/Story → PrototypeStoryInterludeController.cs → UI, Online, Save, Localization와 영향 확인”.
+- 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
+
 ## 담당 범위
 
 - 이야기 사건, 단서, 대사·자막, 귀향패 진행 조건과 목걸이 관련 사건을 담당합니다.

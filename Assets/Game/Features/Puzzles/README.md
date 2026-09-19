@@ -47,3 +47,9 @@
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeStageObjective.cs`: 시작 인원 고정 발판, 지역 장치·열쇠·상자, 보스 공동 장치, 출구 개방. 사망·이탈로 역할 수를 줄이지 않는다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

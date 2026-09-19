@@ -20,11 +20,22 @@
 
 ## 구현 파일 안내
 
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+현재 프로토타입은 챕터 종료 후 영상 삽입 위치로 이동하는 컷신 placeholder만 제공합니다. 실제 영상·자막·타임라인은 사용자 승인 후 추가합니다.
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeStoryInterludeController.cs` | 챕터별 스토리 영상 placeholder 화면과 대기실 복귀 | `PrototypeStoryInterlude_Chapter0X.unity` 실행 후 Continue 조작 |
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeStoryMemory.cs`: 목걸이 상대 방향 계산, 가까운 기억 발견, 영구 다시 읽기용 임시 콘티. 최종 대사와 다섯 조각의 지역 배치는 승인 대상이다.
+
+`PrototypeStoryInterludeController.cs`: 7개 인터루드의 글 콘티·승인 VideoClip 연결·자막·재생 실패 대체 화면·대기실 복귀. 최종 대사·영상은 미확정.
+
+멀티플레이의 계속하기·건너뛰기는 현재 접속 중인 전원이 동의하면 함께 대기실로 이동한다. 접속 종료자는 이 투표에서만 제외하며 출구 점수의 고정 시작 명단은 유지한다. 확정된 동의 규칙과 실제 네트워크 구현 검증은 구분한다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

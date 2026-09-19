@@ -35,11 +35,39 @@ Game Ban은 제재 수단이며 탐지 프로그램이 아니다. 서버 키와 
 
 ## 구현 파일 안내
 
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+아래 로컬 프로토타입 코드가 있다. 시험 동료 시뮬레이션과 실제 별도 프로세스 통신을 구분한다. Steam·PlayFab 운영 환경은 아직 연결하지 않았다.
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| [PrototypeSession.cs](PrototypeSession.cs) | 일반 실행의 로컬 런·연결 변화 시뮬레이션 | [기존 통합 검사](../../../../Docs/Testing/TEST-0003-FullPrototype.md) |
+| [PrototypeNetworkRoom.cs](PrototypeNetworkRoom.cs) | 전용 서버의 접속 명단·준비·챕터 선택·방장 역할 | [방 모델 테스트](../../Tests/PrototypeNetworkRoomTests.cs) |
+| [PrototypeNetworkWaitingServer.cs](PrototypeNetworkWaitingServer.cs) | 대기방의 실제 참가자·이동·충돌·근접 장치 권한 | [멀티 대기방 검사](../../../../Docs/Testing/TEST-0008-NetworkWaitingRoom.md) |
+| [PrototypeNetworkWaitingClient.cs](PrototypeNetworkWaitingClient.cs) | 1인칭 대기방·서버 위치 표시·준비창·로비 이탈 | [표시/권한 검사](../../Tests/PrototypeNetworkWaitingTests.cs) |
+| [PrototypeNetworkWaitingState.cs](PrototypeNetworkWaitingState.cs), [PrototypeNetworkInputChannel.cs](PrototypeNetworkInputChannel.cs) | 대기방 입력 세대·서버 위치 계약과 공통 입력 수명·순서·한도 | [멀티 대기방 검사](../../../../Docs/Testing/TEST-0008-NetworkWaitingRoom.md) |
+| [PrototypeNetworkInputBuffer.cs](PrototypeNetworkInputBuffer.cs) | 연결별 입력 바인딩·순서·수명·한도·단발 소비 | [입력 회귀](../../Tests/PrototypeNetworkInputTests.cs), [서버 연결 결과](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md) |
+| [PrototypeNetworkTransport.cs](PrototypeNetworkTransport.cs) | loopback UDP 접속 승인·바인딩·제한된 명령·서버 스냅샷 | [다중 프로세스 검사](../../../../Docs/Testing/TEST-0004-LocalNetwork.md) |
+| [PrototypeNetworkWorld.cs](PrototypeNetworkWorld.cs) | 전용 서버 챕터·입력 tick·전환 조정자. Bootstrap에 연결 | [실제 2/3/4인 챕터 시작·이동 검사](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md) |
+| [PrototypeNetworkWorldState.cs](PrototypeNetworkWorldState.cs) | 참가자·동적 소품·획득물 상태 계약과 값 검사 | [복제 회귀](../../Tests/PrototypeNetworkReplicaTests.cs) |
+| [PrototypeNetworkReplica.cs](PrototypeNetworkReplica.cs) | 표시 전용 맵·자기 카메라·서버 위치/상태 적용, 클라이언트 판정 비활성화 | [복제 회귀](../../Tests/PrototypeNetworkReplicaTests.cs) |
+| [PrototypeNetworkClientWorld.cs](PrototypeNetworkClientWorld.cs) | 조작 입력·서버 HUD·설정·기억·이야기 동의 화면 | [실제 검증 범위와 남은 연결](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md) |
+| [PrototypeNetworkProgress.cs](PrototypeNetworkProgress.cs) | 서버 완료/기억을 참가자 로컬 저장에 한 번 반영 | [결과 저장·복귀](../../../../Docs/Testing/TEST-0009-NetworkCompletion.md) |
+| [PrototypeNetworkBootstrap.cs](PrototypeNetworkBootstrap.cs) | 2D 메뉴/실행 인자 진입·승인 후 3D 전환·빈 서버 종료 | [일반 로비 검사](../../../../Docs/Testing/TEST-0010-LocalLobbyEntry.md) |
+| [PrototypeLocalConnection.cs](PrototypeLocalConnection.cs), [PrototypeLocalServerProcess.cs](PrototypeLocalServerProcess.cs) | 로컬 입력 검증·숨김 전용 서버 실행·생성 서버 식별 | [일반 로비 검사](../../../../Docs/Testing/TEST-0010-LocalLobbyEntry.md) |
+| [PrototypeLocalLobbyQa.cs](PrototypeLocalLobbyQa.cs) | 일반 로비 버튼의 별도 프로세스 생성·참가·이탈·재참가 검사 | [TestLocalLobby.ps1](../../../../TestLocalLobby.ps1) |
+| [PrototypeNetworkQa.cs](PrototypeNetworkQa.cs) | 시험 인자가 있을 때만 실행되는 별도 프로세스 검사·보고서 | [다중 프로세스 검사](../../../../Docs/Testing/TEST-0004-LocalNetwork.md) |
+| [PrototypeNetworkQa.Lifecycle.cs](PrototypeNetworkQa.Lifecycle.cs) | 서버 시험 배치를 이용한 정산·동의·저장·복귀 검사. 코스 이동 완주 아님 | [시험 범위와 근거](../../../../Docs/Testing/TEST-0009-NetworkCompletion.md) |
+| [PrototypeNetworkQa.Wipe.cs](PrototypeNetworkQa.Wipe.cs) | 1구간 시험 배치·실제 위험 지대 이동·전멸·2D/3D 복귀·새 런·영구 저장 보존 검사 | [전멸 재도전 검사](../../../../Docs/Testing/TEST-0011-NetworkWipeRetry.md) |
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeSession.cs`: 로컬 요청·이탈·재접속·방장 이전·추방 시뮬레이션. 실제 Steam 인증·PlayFab 전용 서버·네트워크·Game Ban은 미구현이며 로컬 검증 결과로 대체하지 않는다.
+
+별도 경로인 `PrototypeNetwork*`는 `127.0.0.1`에만 접속·수신하는 개발용 전용 서버다. Netcode for GameObjects 2.13.2와 Unity Transport 6.6.0을 Unity Package Manager로 설치했다. 이 시험용 조합은 계약의 정식 SDK 결정이 아니다. 클라이언트가 보내는 슬롯/계정 ID를 신뢰하지 않고 승인된 연결 ID에 참가자를 바인딩한다. 최대 인원·버전·이름 형식·패킷 길이·요청 순서·빈도·방장 권한을 검사한다. 로컬 계정 이름은 실제 인증 증거가 아니다.
+
+대기실 상태와 출발 명단에 더해 서버 챕터 시작·참가자별 입력 이동·표시 전용 복제를 연결했다. 별도 서버의 직접 걷는 3D 대기방도 같은 임시 공간을 사용하며, 서버가 이동·장치 접근을 검사한다. 최신 대기방 검증은 [TEST-0008](../../../../Docs/Testing/TEST-0008-NetworkWaitingRoom.md), 챕터 복제는 [TEST-0007](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md)에서 관리한다. 시작·이동 검사만으로 전체 코스의 퍼즐·출구·점수·스토리 완주를 입증하지 않는다. 런 중 신규 접속은 명시적으로 거부하며 안전 구간 중도 합류·재접속은 후속 구현 대상이다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

@@ -105,6 +105,11 @@ try {
             demoChapterCount = 1
             releaseChapterCount = 3
             toolRecommendationsDelegated = $true
+            lobbyPresentation = '2d'
+            waitingRoomPresentation = 'walkable-first-person-3d'
+            chapterStartInteraction = 'chapter-station-then-ready-station'
+            storyContinueConsent = 'all-currently-connected'
+            storyDepartureChangesExitRoster = $false
         }
         Add-Check 'CONTRACT:rule-count' ($contract.approvedRules.Count -eq $expectedRules.Count) 'Only reviewed rules are in the approved section.'
         foreach ($entry in $expectedRules.GetEnumerator()) {

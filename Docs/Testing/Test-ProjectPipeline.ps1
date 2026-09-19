@@ -44,9 +44,10 @@ try {
     foreach ($file in Get-ChildItem -LiteralPath $sourceRoot -File -Force) {
         if ($file.Extension -in @('.md', '.ps1')) { $fixtureFiles.Add($file) }
     }
-    foreach ($folder in @('Docs', 'Assets', '.github')) {
+    foreach ($folder in @('Docs', 'Assets', 'Packages', '.github')) {
         foreach ($file in Get-ChildItem -LiteralPath (Join-Path $sourceRoot $folder) -File -Recurse -Force) {
-            if ($file.Extension -in @('.md', '.json', '.ps1', '.yml', '.yaml') -and $file.Name -ne 'LatestPipelineReport.json') {
+            # Include documented C# and package-manifest link targets, but never Library/Build caches.
+            if ($file.Extension -in @('.md', '.json', '.ps1', '.yml', '.yaml', '.cs') -and $file.Name -ne 'LatestPipelineReport.json') {
                 if ($file.Attributes -band [IO.FileAttributes]::ReparsePoint) { throw 'Fixture source cannot be a reparse point.' }
                 $fixtureFiles.Add($file)
             }
@@ -94,6 +95,12 @@ try {
     Invoke-Case 'wrong-value-type' { param($p)
         $f = Join-Path $p 'Docs/PROJECT_CONTRACT.json'; Write-Fixture $f ((Get-Content -LiteralPath $f -Raw).Replace('"exitWindowSeconds": 5', '"exitWindowSeconds": "5"'))
     } 1 'RULE:exitWindowSeconds'
+    Invoke-Case 'waiting-room-back-to-static-menu' { param($p)
+        $f = Join-Path $p 'Docs/PROJECT_CONTRACT.json'; Write-Fixture $f ((Get-Content -LiteralPath $f -Raw).Replace('"walkable-first-person-3d"', '"fixed-camera-menu"'))
+    } 1 'RULE:waitingRoomPresentation'
+    Invoke-Case 'story-skip-without-unanimous-consent' { param($p)
+        $f = Join-Path $p 'Docs/PROJECT_CONTRACT.json'; Write-Fixture $f ((Get-Content -LiteralPath $f -Raw).Replace('"all-currently-connected"', '"owner-only"'))
+    } 1 'RULE:storyContinueConsent'
     Invoke-Case 'questionnaire-returned' { param($p)
         $f = Join-Path $p 'Plan.md'; Write-Fixture $f ((Get-Content -LiteralPath $f -Raw) + "`n사용자 작성:`n선택:A`n")
     } 1 'SPEC:no-dialogue:Plan.md'

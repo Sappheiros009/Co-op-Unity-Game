@@ -17,13 +17,28 @@
 
 작업 지시 예시: “Player에서 벽 꼭대기에 올라갈 때 위치가 튀는 현상을 확인하고, 재현 조건과 수정 파일을 버그 기록에 남겨주세요.”
 
-## 구현 파일 안내
-
-현재는 폴더 구조와 안내 문서만 있습니다. 코드·프리팹·설정 파일이 추가되면 아래에 실제 경로를 기록합니다. 존재하지 않는 파일을 구현 완료 항목으로 기록하지 않습니다.
+## 현재 프로토타입 구현 파일
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeCapsulePlayer.cs` | 7챕터 공통 1인칭 플레이어 이동·시점·출구 접근 흐름 | 각 챕터 실행 후 이동·출구 접근 확인 |
+| [PrototypeWaitingRoomWalker.cs](PrototypeWaitingRoomWalker.cs) | 직접 걷는 3D 대기방 전용 이동·카메라·충돌. 챕터 점수·피해 판정과 분리 | [대기방 검증](../../../../Docs/Testing/TEST-0006-WalkableWaitingRoom.md) |
+| [PrototypePlayerInput.cs](PrototypePlayerInput.cs) | 이동·시점·협동 조작 의도. 좌표·체력·점수·시뮬레이션 시간은 포함하지 않음 | [서버 입력·물리 제어 검사](../../../../Docs/Testing/TEST-0005-ServerPlayerControl.md) |
+
+현재 플레이어는 로컬 테스트용 단순 조작입니다. 최종 이동·애니메이션·직업·네트워크 소유권은 별도 구현과 검증이 필요합니다.
 
 기능 전용 파일은 이 폴더 안에 둡니다. 파일이 늘어나면 필요한 범위에서 `Scripts`, `Prefabs`, `Data`로 나눕니다.
 
 [전체 폴더 지도](../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../Docs/Bugs/BUG_TEMPLATE.md) · [유지보수 작업 양식](../../../../Docs/Maintenance/TASK_TEMPLATE.md)
+
+## 로컬 프로토타입 구현 (2026-09-19)
+
+`PrototypeCapsulePlayer.cs`: 이동·스태미나·앉기·벽 타기·낙하 복귀. `PrototypeSlimeBody.cs`: 독립 몸통·손·발·얼굴 파츠. `PrototypeClimbSurface.cs`: 등반 가능 표면.
+
+`PrototypeMovementRules.cs`의 모터 입력을 런타임 키보드 어댑터와 물리 회귀가 공유한다. `PrototypeMotorTests`는 낮은 천장·맨틀·벽 점프·메뉴 중 낙하를 검증한다. 최종 온라인 이동 보정은 별도다.
+
+[PrototypeWaitingRoomWalker](PrototypeWaitingRoomWalker.cs)는 대기방 전용 모터를 로컬/서버/표시 제어로 분리한다. 표시 전용 제어는 CharacterController로 움직이지 않고 서버 위치만 적용한다. 챕터의 체력·점수 판정은 수행하지 않는다. [대기방 서버 검사](../../../../Docs/Testing/TEST-0008-NetworkWaitingRoom.md).
+
+`PrototypeCapsulePlayer`는 독립 참가자 ID와 로컬/서버/표시 전용 제어를 구분한다. 서버 제어는 호스트 키보드·카메라·설정창에 의존하지 않고 `StepServerInput`으로 해당 참가자만 실행한다. 물리·입력 준비 검사는 [TEST-0005](../../../../Docs/Testing/TEST-0005-ServerPlayerControl.md), 후속 실제 2/3/4인 입력 수신·서버 이동·표시 전용 복제는 [TEST-0007](../../../../Docs/Testing/TEST-0007-NetworkWorldReplica.md)에 구분한다. 시점 즉시 반응과 위치 보간은 구현했지만 위치 예측/보정·지연/손실 검증은 남아 있다.
+
+실행·미구현 경계: [프로토타입 안내](../../../../Docs/PROTOTYPE_GUIDE.md). 새 검증: [TEST-0003](../../../../Docs/Testing/TEST-0003-FullPrototype.md).

@@ -43,7 +43,30 @@ pwsh -NoProfile -File ./ProjectPipeline.ps1 -Mode Readiness
 | 빌드·사전 배포 | 빌드·해시·시험 환경 | 시작·접속·저장·부하·버전 호환 확인 |
 | 출시·운영 | 승인 배포·안내·복구 | 알려진 문제·롤백 책임과 실제 결과 기록 |
 
-정적 검사 이후의 게임 단계는 미구현이다. Unity 버전·패키지 확인, 게임 테스트·빌드·배포 실행 근거가 없으면 준비 차단을 해제하지 않는다.
+로컬 핵심 구현·PlayMode·Windows 빌드는 [TEST-0003](Testing/TEST-0003-FullPrototype.md)의 실제 결과로 관리한다. 온라인·운영·출시 검사는 별개이며, 로컬 프로토타입 검사만으로 출시 준비 차단을 해제하지 않는다.
+
+## 로컬 게임 검증 재현
+
+Unity Editor가 이 프로젝트를 열고 있지 않을 때 프로젝트 루트에서 실행한다. 설치된 Unity CLI와 유효한 로컬 Unity 라이선스가 필요하다. 비밀 키는 필요하지 않다.
+
+```powershell
+unity test . --mode PlayMode --output Logs/full-prototype-playmode.xml --timeout 600 --format json -- -logFile Logs/full-prototype-tests.log
+unity build . --target StandaloneWindows64 --execute-method SlimeCoop.Prototype.Editor.PrototypeBuild.BuildWindows --output-path Build/FullPrototype/SlimeCoopPrototype.exe --log-file Logs/full-prototype-windows-build.log --allow-dirty-build --no-tail --timeout 900 --format json
+```
+
+씬 재생성은 Unity 메뉴의 `Slime Prototype > Rebuild Prototype Scenes`에서 수행한다. 새 체크아웃에는 TMP Essential Resources가 포함된다. 누락된 환경에서는 `PrototypeSceneBuilder.ImportTextResources`를 `-quit` 없이 실행해 완료를 기다려야 한다. 자동 캡처는 `--prototype-capture <절대 시험 출력 폴더>`를 지정한 플레이어에만 활성화되며 정상 플레이에서는 실행되지 않는다. 원격 CI에 Unity 게임 빌드·비밀 키를 자동 추가하지 않는다.
+
+로컬 통합 명령은 [PrototypePipeline.ps1](../PrototypePipeline.ps1)이다. `-Mode Full`은 문서 검사·씬 생성·PlayMode·Windows 빌드·저장 장애를 포함한 11개 화면 캡처·별도 서버의 2/3/4인 방 관리·과도 요청 격리·2/3/4인 서버 챕터 시작/이동 복제·2/3/4인 서버 시험 배치 정산/저장/이야기/복귀·일반 로비의 2/4인 생성/참가/재참가를 순서대로 실행한다. 2/4인 대기실·서버 챕터·전환은 렌더 검사도 수행한다. `Test`, `Build`, `Capture`, `Network`, `Lifecycle`, `Lobby`로 단계별 실행할 수도 있다. 실패 코드·보고서 최신 시각·빈 테스트·캡처 오류와 필수 PNG 각각의 존재/생성 시각을 확인하며, 사람이 직접 PNG를 여는 시각 검수는 자동 성공에 포함하지 않는다. 사용자 편집기를 강제 종료하거나 GitHub·Notion으로 게시하지 않는다.
+
+별도 프로세스의 실행 식별자·서버 ID·접속 슬롯·종료 코드와 거부 횟수는 [LocalNetwork.ps1](../LocalNetwork.ps1)이 대조한다. `-Scenario World`는 서버/런 동일성과 입력한 참가자만 실제 이동했는지도 검사한다. 보고서는 읽기 중 원자적 교체를 허용하는 공유 방식으로 연다. 명령은 `127.0.0.1`의 개발용 통신만 검사하며 클라우드 계정·요금 자원·방화벽을 변경하지 않는다. 방 관리 범위는 [TEST-0004](Testing/TEST-0004-LocalNetwork.md), 서버 챕터 시작/이동은 [TEST-0007](Testing/TEST-0007-NetworkWorldReplica.md)에 명시한다.
+
+후속 네트워크 회귀는 [TEST-0008](Testing/TEST-0008-NetworkWaitingRoom.md)의 직접 걷는 대기방을 사용한다. 실제 입력으로 장치에 접근하고 서버의 원거리 준비 거부도 확인한다. 2/4인 방 검사에는 `waiting-room.png`와 `waiting-ready.png`의 새 생성 여부가 포함된다. 일시적인 보고서 교체 잠금은 제한된 재시도 횟수를 기록하고, 최종 보고서를 저장하지 못하면 성공 종료하지 않는다.
+
+`-Mode Lifecycle` 또는 `LocalNetwork.ps1 -Scenario LifecycleFixture -Mode Test -Players 4`는 [TEST-0009](Testing/TEST-0009-NetworkCompletion.md)의 별도 전환 검사를 실행한다. 서버에서 참가자·상자를 시험 위치에 배치하므로 코스의 실제 입력 완주 증거가 아니다. 마지막 구간 정산 데이터·개인 저장 파일·동의 철회·접속 종료자 제외·새 대기방 세대를 대조하며, 2/4인은 `network-story.png`와 `returned-waiting-room.png`도 생성한다. 이 모드의 저장은 프로세스와 실행 ID별로 격리한다.
+
+`-Mode Lobby` 또는 [TestLocalLobby.ps1](../TestLocalLobby.ps1)의 `-Players 2`/`4`는 일반 2D 로비의 버튼으로 전용 서버 생성·참가·취소/재시도·3D 표시·이탈/재참가·빈 서버 종료를 검사한다. 실행 ID·참가 프로세스·동일 서버·정상 종료·새 PNG를 확인하고 결과를 `Logs/Network/인원-player-lobby`에 남긴다. 실행 인자로 네트워크 화면에 바로 진입하는 기존 검사와 구분한다. [TEST-0010](Testing/TEST-0010-LocalLobbyEntry.md)의 실패 유도 로그 분류와 사람의 창 조작 미검증 경계를 따른다.
+
+`-Mode Wipe` 또는 `LocalNetwork.ps1 -Scenario WipeFixture -Mode Test -Players 4 -Capture`는 [TEST-0011](Testing/TEST-0011-NetworkWipeRetry.md)의 전멸·2D 결과·3D 대기방·같은 챕터 새 런 검사를 실행한다. 1구간 시험 배치와 2구간 위험 지대 옆 배치 후 실제 클라이언트 이동을 사용한다. 마지막 생존자 대기·기존 입력 거부·영구 파일 보존을 확인한다. 2/4인 PNG 3장과 실행별 격리 저장을 함께 검증한다. `Full`은 기존 단계 이후 `Wipe` 2/3/4인도 수행한다.
 
 ## 필수 회귀 기준
 

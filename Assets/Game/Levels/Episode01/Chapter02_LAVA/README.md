@@ -4,7 +4,7 @@
 
 식는 발판과 녹는 발판, 가장자리 구조와 이동 도구를 활용하는 지역입니다. LAVA의 대문자를 그대로 유지합니다.
 
-위 내용은 읽은 기획서의 선택 답변을 근거로 한 제작 범위 안내입니다. 현재 씬·맵·프리팹은 없으며 구현 완료를 뜻하지 않습니다.
+현재 프로토타입은 공통 3D 테스트 경로에 LAVA의 적·주황 계열 색상 팔레트만 적용합니다. 챕터 종료 후 `PrototypeStoryInterlude_Chapter02`를 거쳐 대기실로 돌아갑니다.
 
 ## 여기에 둘 파일
 
@@ -29,5 +29,7 @@
 
 | 실제 파일 | 역할 | 확인 방법 |
 |---|---|---|
+| `PrototypeChapter02.unity` | 저장형 용암 지대 3D 테스트 씬 | 대기실에서 Chapter 02 선택 |
+| `PrototypeStoryInterlude_Chapter02.unity` | Chapter02 종료 후 영상 삽입용 placeholder | 챕터 종료 후 자동 이동 |
 
 [전체 폴더 지도](../../../../../Docs/FOLDER_MAP.md) · [버그 기록 양식](../../../../../Docs/Bugs/BUG_TEMPLATE.md)

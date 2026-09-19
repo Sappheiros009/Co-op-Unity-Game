@@ -1,0 +1,10 @@
+{
+  "rulesVersion": "prototype-experiment-v2",
+  "walkSpeed": 4.5, "sprintSpeed": 7.0, "jumpHeight": 1.4, "gravity": 22.0,
+  "staminaMaximum": 100.0, "sprintDrain": 16.0, "climbDrain": 22.0, "staminaRecovery": 25.0,
+  "climbSpeed": 2.7, "exhaustionGrace": 0.7,
+  "reviveSeconds": 3.0, "healerReviveSeconds": 6.0,
+  "reviveHealth": 35.0, "reviveProtection": 2.0, "interactionRange": 3.2,
+  "inventorySlots": 3, "speedScoreMaximum": 1000, "arrivalBonusPerExtra": 250,
+  "speedScoreDecay": 10.0, "puzzleHoldSeconds": 2.0, "monsterDamage": 14.0
+}

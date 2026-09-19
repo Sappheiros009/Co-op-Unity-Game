@@ -2,7 +2,7 @@
 
 폴더명은 실제 경로의 대소문자까지 그대로 사용합니다. 아래 링크를 열면 담당 범위와 관련 폴더를 확인할 수 있습니다.
 
-게임 기능 폴더에는 아직 안내 문서만 있습니다. 루트와 Docs/Testing에는 실행 가능한 기획 검증 스크립트, `.github/workflows`에는 CI 파일을 추가했습니다. 게임 코드·씬·프리팹이 생기면 해당 README에 실제 파일과 확인 방법을 기록합니다.
+게임 기능 폴더에는 프로토타입 코드와 안내 문서가 함께 있습니다. 루트와 Docs/Testing에는 실행 가능한 기획 검증 스크립트, `.github/workflows`에는 CI 파일을 추가했습니다. 게임 코드·씬·프리팹이 생기면 해당 README에 실제 파일과 확인 방법을 기록합니다.
 
 ## 전체 구조
 
@@ -12,6 +12,9 @@
 ├─ README.md
 ├─ AGENTS.md
 ├─ ProjectPipeline.ps1
+├─ PrototypePipeline.ps1
+├─ TestLocalLobby.ps1
+├─ LocalNetwork.ps1
 ├─ .gitignore
 ├─ .github/
 │  └─ workflows/
@@ -21,7 +24,10 @@
 │  ├─ NAMING_DECISIONS.md
 │  ├─ PROJECT_PROMPT.md
 │  ├─ WORKING_PRINCIPLES.md
+│  ├─ REFERENCE_SOURCES.md
 │  ├─ PROJECT_STATE.md
+│  ├─ PROTOTYPE_GUIDE.md
+│  ├─ PROTOTYPE_COVERAGE.md
 │  ├─ DESIGN_TEMPLATE.md
 │  ├─ DESIGN-0001-StageExit.md
 │  ├─ DESIGN-0002-CharacterAssetProduction.md
@@ -60,7 +66,8 @@
    │  │  │  ├─ Chapter04_ThunderSea/
    │  │  │  ├─ Chapter05_Square/
    │  │  │  ├─ Chapter06_FrozenMountain/
-   │  │  │  └─ Chapter07_Hometown/
+   │  │  │  ├─ Chapter07_Hometown/
+   │  │  │  └─ StoryInterludes/
    │  │  └─ Sandbox/
    │  ├─ Art/
    │  ├─ Audio/
@@ -70,7 +77,7 @@
    └─ ThirdParty/
 ```
 
-Unity 기본 설정 폴더인 `Packages`·`ProjectSettings`는 실제 Unity 프로젝트 생성 단계에서 준비합니다. 현재 구조에 해당 파일이 있는 것으로 간주하지 않습니다.
+로컬 작업공간에는 Unity 6000.6.1f1용 `Packages`·`ProjectSettings`, 프로토타입 코드와 16개 씬이 있습니다. 2026-09-18 `Assets/Game/Editor/PrototypeSceneBuilder.cs`로 씬·메타데이터와 Build Settings를 재생성하고 현재 소스의 별도 Windows 빌드 및 헤드리스 초기 기동을 검증했습니다. 다만 GitHub `main`에는 아직 게시되지 않았습니다. `Build`, `Library`, `Logs`, `UserSettings`, `_UnityTemplate`은 로컬 산출물·캐시·제작용 작업공간이므로 소스 폴더 지도와 Git 게시 대상에서 제외합니다.
 
 자동화 위치: [루트 검사기](../ProjectPipeline.ps1), [검사기 자기 테스트](Testing/Test-ProjectPipeline.ps1), [CI 파일](../.github/workflows/project-validation.yml). 실행 방법과 미구현 단계는 [파이프라인](PIPELINE.md), 실제 결과는 [TEST-0001](Testing/TEST-0001-PlanningPipeline.md)을 봅니다. `.github/workflows`는 GitHub의 표준 자동화 경로이며 사용자 지정 게임 폴더명을 바꾸지 않습니다.
 
@@ -125,6 +132,8 @@ Unity 기본 설정 폴더인 `Packages`·`ProjectSettings`는 실제 Unity 프�
 | [Chapter06_FrozenMountain](../Assets/Game/Levels/Episode01/Chapter06_FrozenMountain/README.md) | 얼어붙은 산 |
 | [Chapter07_Hometown](../Assets/Game/Levels/Episode01/Chapter07_Hometown/README.md) | 슬라임 고향 |
 
+챕터 사이 영상씬은 [StoryInterludes](../Assets/Game/Levels/Episode01/StoryInterludes/README.md)에서 관리합니다. 현재는 실제 영상 대신 챕터별 placeholder 씬만 있습니다.
+
 챕터 폴더를 준비한 것은 제작 완료나 출시 범위 확정을 뜻하지 않습니다. 파일이 생길 때 필요한 챕터에 `Stages`·`Rooms`·`Corridors`·`Boss`를 추가합니다.
 
 ## 공통 자원과 도구
@@ -140,6 +149,8 @@ Unity 기본 설정 폴더인 `Packages`·`ProjectSettings`는 실제 Unity 프�
 | [Assets/Game/Editor](../Assets/Game/Editor/README.md) | 제작 보조 도구 |
 | [Assets/Game/Tests](../Assets/Game/Tests/README.md) | 구현 검증 |
 | [Assets/ThirdParty](../Assets/ThirdParty/README.md) | 외부 에셋과 도구 |
+
+에셋·도구 후보를 찾는 출처와 사용 기준은 [개발 참고자료](REFERENCE_SOURCES.md), 실제 도입 파일과 검증 결과는 ThirdParty 및 담당 기능 README에서 관리합니다. 사이트 등록과 파일 도입은 구분합니다.
 
 ## 증상으로 담당 찾기
 

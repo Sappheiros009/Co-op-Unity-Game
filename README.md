@@ -12,13 +12,22 @@
 | 서버·기능·저장·보안 책임 | [시스템 구조](Docs/ARCHITECTURE.md) |
 | 검사·빌드·출시 절차 | [파이프라인](Docs/PIPELINE.md) |
 | 구현 상태와 미정 사항 | [개발 상태](Docs/PROJECT_STATE.md) |
+| 중단 시점 결과·실행 방법·남은 작업 | [프로토타입 인계서](Docs/PROTOTYPE_HANDOFF.md) · [실행 안내](Docs/PROTOTYPE_GUIDE.md) · [기획 충족도](Docs/PROTOTYPE_COVERAGE.md) |
 | 실제 검사 결과 | [검증 기록](Docs/Testing/TEST-0001-PlanningPipeline.md) |
 | Notion·GitHub 동기화 | [게시 상태](Docs/PUBLISH_STATUS.md) |
 | 변경·버그·장애 관리 | [유지보수](Docs/Maintenance/README.md) · [버그](Docs/Bugs/README.md) · [운영](Docs/Operations/README.md) |
 
 ## 현재 범위
 
-기획 문서, 기능·지역별 폴더 안내, 운영 양식과 기획 검사기를 관리한다. Unity 게임 코드·씬·Packages·ProjectSettings는 아직 없다. PlayFab·Steam 연동과 실제 게임 빌드·배포도 아직 수행하지 않았다.
+2026-09-20 사용자 요청으로 추가 개발 목표를 중단하고 현재까지의 작업을 게시한다. 완성·출시 선언이 아니다. 현재 소스는 `codex/00-prototype-baseline` 작업 브랜치에서 관리하며 `main` 병합 및 Notion 반영 여부는 [게시 상태](Docs/PUBLISH_STATUS.md)를 따른다.
+
+Unity 6000.6.1f1 기반 **2D 로비 → 직접 걷는 1인칭 3D 대기방 → 선택한 Chapter01~07 → 이야기 → 대기방**의 16개 씬과 기능 확인용 기본 도형·분리된 캐릭터 파츠를 포함한다. 시험 동료 모드와 같은 PC의 별도 서버·실제 2~4인 클라이언트 모드를 구분한다. 전멸 시 임시 진행·점수를 초기화하고 2D 로비로 복귀하며 영구 진행·설정은 유지한다.
+
+2026-09-19 전체 PlayMode 156/156, Windows 빌드, 실제 2/3/4인 전멸·재도전 및 최신 빌드의 4인 로비·완료 복귀 회귀가 통과했다. 서버 시험 배치를 포함하는 검사이며, 7챕터 실제 입력 완주·다른 PC 접속·Steam/PlayFab·저사양 성능·최종 아트·출시는 미검증 또는 미구현이다. [검증 범위와 근거](Docs/Testing/TEST-0011-NetworkWipeRetry.md)를 확인한다.
+
+## 실행 시작점
+
+Unity 6000.6.1f1에서 이 저장소를 열고 `Assets/Game/Levels/Lobby/PrototypeLobby.unity`를 더블클릭한 뒤 Play를 누른다. 빈 Untitled 씬에서 실행하지 않는다. 상세 조작·빌드·같은 PC 멀티 실행은 [실행 안내](Docs/PROTOTYPE_GUIDE.md)를 따른다. `Build`의 Windows 실행 파일·캐시·개인 저장·원시 로그는 이 소스 게시에 포함하지 않는다.
 
 ## 문서 검사
 
@@ -30,7 +39,7 @@ pwsh -NoProfile -File ./Docs/Testing/Test-ProjectPipeline.ps1
 pwsh -NoProfile -File ./ProjectPipeline.ps1 -Mode Readiness
 ```
 
-Validate는 문서·계약·경로 검사다. Readiness는 게임·출시 증거가 없어 현재 BLOCKED가 정상이다.
+Validate는 문서·계약·경로 검사다. Readiness는 미정 결정, 재현 가능한 Unity 테스트·빌드, 서버·출시 검증이 없어 현재 BLOCKED가 정상이다.
 
 ## 작업 지시
 

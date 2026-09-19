@@ -13,6 +13,9 @@
 | [폴더 지도](FOLDER_MAP.md) | 담당 폴더와 증상별 조사 위치 |
 | [명칭 기준](NAMING_DECISIONS.md) | 대소문자를 포함한 확정 이름 |
 | [게시 상태](PUBLISH_STATUS.md) | Notion·GitHub 반영 증거 |
+| [프로토타입 인계서](PROTOTYPE_HANDOFF.md) | 개발 중단 시점 구현·증거·미완료 범위 |
+| [프로토타입 실행 안내](PROTOTYPE_GUIDE.md) | Unity 시작 씬·로컬 실행·같은 PC 멀티·조작 |
+| [기획 대비 충족도](PROTOTYPE_COVERAGE.md) | 확정 요구별 구현·검증·남은 작업 구분 |
 | [작업 원칙](WORKING_PRINCIPLES.md) | 문서·자료·설계·협업 기준 |
 | [개발 원칙 원문](PROJECT_PROMPT.md) | 사용자가 제공한 역할·전체 개발 지침 |
 | [설계 양식](DESIGN_TEMPLATE.md) | 새 기능의 책임·데이터·검증 작성 |

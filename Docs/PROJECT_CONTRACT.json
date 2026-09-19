@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "reviewDate": "2026-09-17",
+  "reviewDate": "2026-09-19",
   "scope": "planning-validation-only",
   "decisionSource": "Plan.md",
   "approvedRules": {
@@ -34,7 +34,12 @@
     "monsterKillScore": false,
     "demoChapterCount": 1,
     "releaseChapterCount": 3,
-    "toolRecommendationsDelegated": true
+    "toolRecommendationsDelegated": true,
+    "lobbyPresentation": "2d",
+    "waitingRoomPresentation": "walkable-first-person-3d",
+    "chapterStartInteraction": "chapter-station-then-ready-station",
+    "storyContinueConsent": "all-currently-connected",
+    "storyDepartureChangesExitRoster": false
   },
   "pendingDecisions": {
     "networkPackage": null,

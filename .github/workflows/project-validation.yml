@@ -34,6 +34,8 @@ jobs:
         run: ./ProjectPipeline.ps1 -Mode Validate -WriteReport
       - name: Test validator with positive and negative fixtures
         run: ./Docs/Testing/Test-ProjectPipeline.ps1
+      - name: Check test, bug, and operations records
+        run: ./Docs/Testing/Test-OperationalRecords.ps1
       - name: Save validation evidence only
         if: always()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0

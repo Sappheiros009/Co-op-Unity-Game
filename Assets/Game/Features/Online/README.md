@@ -10,6 +10,16 @@
 - 지시 예시: “서버와 클라이언트 위치 불일치 → Features/Online → PrototypeNetworkWorld.cs → Player, Core, Save와 영향 확인”.
 - 아래 상세 기획은 목표 책임, 날짜가 있는 구현·검사 기록은 해당 시점의 이력이다. 코드 존재와 정상 동작·서비스 연결 완료를 구분한다.
 
+## PlayFab·Steam 연동 경계 (2026-09-20)
+
+`OnlineServiceContracts.cs`와 `OnlineSessionCoordinator.cs`는 Steam 인증·PlayFab Multiplayer Servers 할당·전용 서버 상태 복제를 위한 서비스 중립 계약이다. `OnlineUnavailableAdapters.cs`는 SDK가 없는 상태에서 성공을 가장하지 않도록 명시적으로 실패한다.
+
+- 현재 `Packages`에는 Netcode for GameObjects·Unity Transport만 있으며 실제 Steam/PlayFab SDK는 연결되지 않음.
+- 로컬 `PrototypeNetwork*`는 loopback 시험 경로이며 Steam 계정·PlayFab 서버·Game Ban 증거가 아님.
+- 서버 스냅샷의 시작 명단은 최초 확정 후 연결 종료·사망으로 축소하지 않음.
+- 클라이언트는 명령만 제출하고 런·스테이지·출구·점수·방장 역할은 서버 사건으로만 반영함.
+- Steam/PlayFab SDK·패키지·환경 변수·운영 키가 필요한 변경은 이 폴더 밖을 수정하지 않고 담당 채팅에 전달함.
+
 ## 담당 범위
 
 - Steam 인증, 친구 초대·방 목록·접속·종료·재합류를 PlayFab과 연결한다.
